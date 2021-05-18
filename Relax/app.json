@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "Relax",
-    "slug": "Relax",
+    "name": "relax",
+    "slug": "relax",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",

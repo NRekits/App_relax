@@ -1,21 +1,39 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React,{useEffect,useState} from 'react';
+import { NavigationNativeContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import LoginScreen from './screens/LoginScreen'
+import SecureStore from 'expo-secure-store';
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+const Stack = createStackNavigator();
+
+
+
+
+export default function App({ navigation }){
+   const [isloggedin,setLogged] = useState(null)
+
+   const detectLogin= async ()=>{
+      const token = await AsyncStorage.getItem('token')
+      if(token){
+          setLogged(true)
+      }else{
+          setLogged(false)
+      }
+   }
+  useEffect(()=>{
+     detectLogin()
+  },[]);
+
+  return(
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="login">
+      <Stack.Screen name="login" component={LoginScreen} />
+        </Stack.Navigator>
+    </NavigationContainer>
+  
   );
+
+
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App;
