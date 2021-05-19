@@ -7,10 +7,9 @@ import SecureStore from 'expo-secure-store';
 const Stack = createStackNavigator();
 
 
-
-
 export default function App({ navigation }){
-   const [isloggedin,setLogged] = useState(null)
+
+   /*const [isloggedin,setLogged] = useState(null)
 
    const detectLogin= async ()=>{
       const token = await AsyncStorage.getItem('token')
@@ -22,7 +21,7 @@ export default function App({ navigation }){
    }
   useEffect(()=>{
      detectLogin()
-  },[]);
+  },[]);*/
 
   return(
     <NavigationContainer>
