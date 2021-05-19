@@ -1,4 +1,4 @@
-import React,{useState, AsyncStorage} from 'react';
+import React,{useState} from 'react';
 import { Button ,TextInput,
   View,
   Text,
@@ -14,7 +14,7 @@ const LoginScreen = (props) => {
   const [email,setEmail] = useState('');
   const [password,setPassword]=useState('')
   
-  
+  /*
   const sendCred = async (props)=>{
     fetch("http://10.0.2.2:3000/signin",{
       method:"POST",
@@ -36,17 +36,12 @@ const LoginScreen = (props) => {
               Alert(e)
            }
     });
- }
+ }*/
 
   return (
-   <> 
-   <KeyboardAvoidingView behavior="position">
-     <StatusBar backgroundColor="blue" barStyle="light-content" />
-      <Text 
-      style={{fontSize:35,marginLeft:18,marginTop:10,color:"#3b3b3b"}}>welcome to</Text>
-      <Text 
-      style={{fontSize:30,marginLeft:18,color:"blue"}}
-      >Coders Never Quit</Text>
+ <View>
+     <StatusBar barStyle="light-content" />
+  
       <View
       style={{
         borderBottomColor:"blue",
@@ -84,6 +79,7 @@ const LoginScreen = (props) => {
       />
       <Button 
         mode="contained"
+        title= "Login"
         style={{marginLeft:18,marginRight:18,marginTop:18}}
        onPress={() => sendCred(props)}>
         Login
@@ -97,8 +93,7 @@ const LoginScreen = (props) => {
       >dont have a account ?</Text>
       </TouchableOpacity>
       
-      </KeyboardAvoidingView>
-   </>
+      </View>
   );
 };
 

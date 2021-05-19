@@ -1,5 +1,5 @@
 import React,{useEffect,useState} from 'react';
-import { NavigationNativeContainer } from '@react-navigation/native';
+import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import LoginScreen from './screens/LoginScreen'
 import SecureStore from 'expo-secure-store';
@@ -7,7 +7,7 @@ import SecureStore from 'expo-secure-store';
 const Stack = createStackNavigator();
 
 
-export default function App({ navigation }){
+ function App({ navigation }){
 
    /*const [isloggedin,setLogged] = useState(null)
 
@@ -26,8 +26,8 @@ export default function App({ navigation }){
   return(
     <NavigationContainer>
       <Stack.Navigator initialRouteName="login">
-      <Stack.Screen name="login" component={LoginScreen} />
-        </Stack.Navigator>
+       <Stack.Screen name="login" component={LoginScreen} />
+      </Stack.Navigator>
     </NavigationContainer>
   
   );
