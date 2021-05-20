@@ -3,7 +3,6 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import LoginScreen from './screens/LoginScreen';
 import HomeScreen from './screens/LoginScreen';
-import SecureStore from 'expo-secure-store';
 
 const Stack = createStackNavigator();
 class App extends React.Component{
