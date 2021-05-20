@@ -74,8 +74,9 @@ router.post('/login', async (req, res) => {
 
         res.json({
             error: null,
-            data: 'exito bienvenido'
-        })
+            data: 'exito bienvenido',
+            token: token
+        });
 
     }catch(e){
         return status(400).json({error: "Hubo un error en el login, por favor intenta de nuevo"})
