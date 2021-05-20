@@ -65,17 +65,23 @@ router.post('/login', async (req, res) => {
     const validPassword = await bcrypt.compare(req.body.password, user.password);
     if (!validPassword) return res.status(400).json({ error: 'contraseña no válida' })
     
-    res.json({
-        error: null,
-        data: 'exito bienvenido'
-        
-    })
-     // create token
-    const token = jwt.sign({
-        name: user.name,
-        id: user._id
-    }, process.env.TOKEN_SECRET)
-    
+    try {
+        // create token
+        const token = jwt.sign({
+            name: user.name,
+            id: user._id
+        }, "secret");
+
+        res.json({
+            error: null,
+            data: 'exito bienvenido'
+        })
+
+    }catch(e){
+        return status(400).json({error: "Hubo un error en el login, por favor intenta de nuevo"})
+    }
+
+
 
 })
 module.exports = router;
