@@ -5,9 +5,7 @@ import LoginScreen from './screens/LoginScreen'
 import SecureStore from 'expo-secure-store';
 
 const Stack = createStackNavigator();
-
-
- function App({ navigation }){
+function App({ navigation }){
 
    /*const [isloggedin,setLogged] = useState(null)
 
