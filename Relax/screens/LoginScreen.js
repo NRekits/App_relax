@@ -32,11 +32,11 @@ class LoginScreen extends React.Component {
     .then(res=>res.json())
     .then(async (data)=>{
            try {
-             await SecureStorage.setItemAsync('token',data.token)
-             props.navigation.replace("home")
+             await SecureStorage.setItemAsync('token',data.token);
+             navigation.navigate("home")
              
            } catch (e) {
-             console.log("error hai",e)
+             console.log("error hai",e);
               Alert(e)
            }
     })

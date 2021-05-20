@@ -6,8 +6,14 @@ import HomeScreen from './screens/LoginScreen';
 import SecureStore from 'expo-secure-store';
 
 const Stack = createStackNavigator();
-function App({ navigation }){
-
+class App extends React.Component{
+	constructor(props) {
+		super(props);
+		this.state = {
+			Loggin: '',
+			setLogged: ''
+		};
+	}
    /*const [isloggedin,setLogged] = useState(null)
 
    const detectLogin= async ()=>{
@@ -21,7 +27,7 @@ function App({ navigation }){
   useEffect(()=>{
      detectLogin()
   },[]);*/
-
+render (){
   return(
     <NavigationContainer>
       <Stack.Navigator initialRouteName="login">
@@ -32,7 +38,7 @@ function App({ navigation }){
   
   );
 
-
+  }
 }
 
 export default App;
