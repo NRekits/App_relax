@@ -1,7 +1,8 @@
 import React,{useEffect,useState} from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import LoginScreen from './screens/LoginScreen'
+import LoginScreen from './screens/LoginScreen';
+import HomeScreen from './screens/LoginScreen';
 import SecureStore from 'expo-secure-store';
 
 const Stack = createStackNavigator();
@@ -25,6 +26,7 @@ function App({ navigation }){
     <NavigationContainer>
       <Stack.Navigator initialRouteName="login">
        <Stack.Screen name="login" component={LoginScreen} />
+       <Stack.Screen name="home" component={HomeScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   
