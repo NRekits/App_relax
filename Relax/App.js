@@ -6,6 +6,7 @@ import LoginScreen from './screens/LoginScreen';
 import HomeScreen from './screens/HomeScreen';
 import RegisterScreen from './screens/RegistroScreen';
 import ListaMeditacionesScreen from './screens/CatmedScreen';
+import MeditacionScreen from './screens/MeditacionScreen';
 import * as Font from 'expo-font';
 import { Ionicons } from '@expo/vector-icons';
 
@@ -44,6 +45,7 @@ class App extends React.Component {
   }
 
   render() {
+
     if (this.state.isLoading) {
       return (
         <Container><Text>Is Loading</Text></Container>
@@ -60,6 +62,7 @@ class App extends React.Component {
             <Stack.Screen name="home" component={HomeScreen} />
             <Stack.Screen name="Registro" component={RegisterScreen} />
             <Stack.Screen name="lista" component={ListaMeditacionesScreen} />
+            <Stack.Screen name="meditacion" component={MeditacionScreen} />
           </Stack.Navigator>
         </NavigationContainer>
       );
