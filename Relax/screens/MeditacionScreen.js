@@ -9,19 +9,21 @@ import {
   Card, CardItem, H2
 } from 'native-base';
 
+import AudioPlayer from './../Components/AudioPlayer';
+
 class MeditacionScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       nombre: '',
       descripcion: '',
-      isLoading: true
+      isLoading: true,
+      url: ''
     };
-    console.log(props.route.params);
   }
 
   componentDidMount() {
-    this.setState({ nombre: this.props.route.params.nombre, descripcion: this.props.route.params.descripcion, isLoading: false });
+    this.setState({ nombre: this.props.route.params.nombre, descripcion: this.props.route.params.descripcion, isLoading: false, url: this.props.route.params.url});
   }
 
   /*
@@ -50,7 +52,6 @@ class MeditacionScreen extends React.Component {
       );
     }
     else {
-      console.log(this.state);
       return (
         <Container>
           <Header>
@@ -81,8 +82,8 @@ class MeditacionScreen extends React.Component {
                 </Text>
               </CardItem>
               <CardItem bordered last>
-                <Body>
-                  <Text>Hola</Text>
+                <Body style={{alignItems: 'center'}}>
+                  <AudioPlayer url ={this.state.url} />
                 </Body>
               </CardItem>
             </Card>
