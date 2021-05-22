@@ -1,5 +1,5 @@
 import React from "react";
-import { Text, Alert, Image, StyleSheet } from "react-native";
+import { Text, Dimensions, Alert, Image, StyleSheet } from "react-native";
 import {
   Container,
   Header,
@@ -7,7 +7,6 @@ import {
   Form,
   Item,
   Input,
-  InputGroup,
   Label,
   Button,
   H1
@@ -16,8 +15,9 @@ import * as SecureStore from "expo-secure-store";
 import { LinearGradient } from 'expo-linear-gradient';
 import IP_DB from "./../ip_address";
 import * as Font from "expo-font";
-import { color } from "react-native-reanimated";
 
+const windowWidth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
 class LoginScreen extends React.Component {
   constructor(props) {
     super(props);
@@ -74,7 +74,7 @@ class LoginScreen extends React.Component {
         <Header transparent  androidStatusBarColor="#00B0E8"/>
         <LinearGradient
         // Background Linear Gradient
-        colors={['rgba(0,0,0,0.8)', 'transparent']}
+        colors={['#00B0E8', '#08799C']}
         style={styles.background}
       />
         <Image
@@ -190,6 +190,13 @@ const styles = StyleSheet.create({
     fontWeight:'400',
     fontSize:30,
     marginTop:20
+  },
+  background: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    top: 0,
+    height: windowHeight,
   }
 });
 export default LoginScreen;
