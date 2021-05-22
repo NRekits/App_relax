@@ -1,10 +1,5 @@
 import React from "react";
-import {
-  Button,
-  Text,
-  Alert,
-  StyleSheet
-} from "react-native";
+import { Text, Alert, Image, StyleSheet } from "react-native";
 import {
   Container,
   Header,
@@ -12,10 +7,16 @@ import {
   Form,
   Item,
   Input,
+  InputGroup,
   Label,
+  Button,
+  H1
 } from "native-base";
 import * as SecureStore from "expo-secure-store";
+import { LinearGradient } from 'expo-linear-gradient';
 import IP_DB from "./../ip_address";
+import * as Font from "expo-font";
+import { color } from "react-native-reanimated";
 
 class LoginScreen extends React.Component {
   constructor(props) {
@@ -66,89 +67,129 @@ class LoginScreen extends React.Component {
         this.setState({ error: true });
       });
   };
-  /*
-    fetchJsonGetMethod() {
-      return fetch('https://reactnative.dev/movies.json', {method: 'POST',
-    method: 'POST',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-      firstParam: 'yourValue',
-      secondParam: 'yourOtherValue'
-    })
-    }).then((res) => res.json())
-      .then((data) => {this.setState({email: data.movies[0].title, password: data.movies[1].title})})
-      .catch((error) => console.error(error))
-      .finally(() => console.log(this.state.email, this.state.password));
-    }
-  */
+
   render() {
     return (
-
-      <Container>
-        <Header />
-        <Text>
-          Ingresar con correo
-        </Text>
+      <Container style={styles.Container}>
+        <Header transparent  androidStatusBarColor="#00B0E8"/>
+        <LinearGradient
+        // Background Linear Gradient
+        colors={['rgba(0,0,0,0.8)', 'transparent']}
+        style={styles.background}
+      />
+        <Image
+          source={require("../assets/logo_renew_transparente_100x100.png")}
+          style={styles.Image}
+        />
+        <H1 style={styles.H1}>Bienvenido</H1>
         <Content>
           <Form>
-            <Item floatingLabel>
-              <Label>Correo</Label>
+            <Item floatingLabel style={styles.Item}>
+              <Label   style={styles.Input}>Correo</Label>
               <Input
                 label="Email"
-                mode="outlined"
                 value={this.state.email}
-                style={{ marginLeft: 18, marginRight: 18, marginTop: 18 }}
-                theme={{ colors: { primary: "blue" } }}
+             
                 onChangeText={(text) => {
                   this.setState({ email: text });
                 }}
               />
             </Item>
 
-            <Item floatingLabel last>
-              <Label>Contraseña</Label>
+            <Item floatingLabel style={styles.Item}>
+              <Label style={styles.Input}>Contraseña</Label>
 
               <Input
                 label="password"
-                mode="outlined"
                 secureTextEntry={true}
                 value={this.state.password}
                 onChangeText={(text) => {
                   this.setState({ password: text });
+
                 }}
-                style={{ marginLeft: 18, marginRight: 18, marginTop: 18 }}
-                theme={{ colors: { primary: "blue" } }}
+                style={{alignSelf:'stretch'}}
               />
             </Item>
-            <Button
-              mode="contained"
-              title="Login"
-              style={{ marginLeft: 18, marginRight: 18, marginTop: 18 }}
-              onPress={() => this.Verify()}
-            >
-              Login
-              </Button>
+
+            <Button block bordered rounded info style={styles.Button}
+              onPress={() => {
+                this.Verify();
+              }}>
+              <Text style={styles.Text2}>Login</Text>
+            </Button>
           </Form>
+          <Text style={styles.Text2}>
+            ¿No tienes cuenta?
+            <Text
+              style={styles.Text3}
+              onPress={() => {
+                this.props.navigation.navigate("Registro");
+              }}
+            >
+              {" "}
+              Registrate
+            </Text>
+          </Text>
         </Content>
       </Container>
-
-
     );
   }
 }
 const styles = StyleSheet.create({
   Container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-
+    flexDirection:'column',
+    alignItems: "stretch",
+    justifyContent: "center",
+    padding: 20,
+    fontFamily: "Dosis",
+    color: "white",
   },
   Text: {
-    fontSize: 40
+    fontSize: 40,
+  },
+  Text2: {
+    marginTop: 5,
+    fontWeight:'400',
+    fontSize:20,
+    color: "white",
+    marginLeft: 5,
+    fontFamily: "Dosis",
+  },
+  Text3: {
+    marginTop: 10,
+    fontSize: 15,
+    color: "rgb(183,215,222)",
+    marginLeft: 5,
+    fontFamily: "Dosis",
+  },
+  Image: {
+    alignSelf: "center",
+    marginBottom:10
+  },
+  Input: {
+    alignSelf:"flex-start",
+    color: "white",
+    fontFamily: "Dosis",
+    fontWeight:'400',
+    fontSize:20,
+    marginRight:5,
+    marginBottom:10
+  },
+  Button: {
+    alignSelf:'center',
+    marginTop: 20,
+  },
+  Item:{
+    marginTop:30,
+  },
+  H1:{
+    alignSelf: "center",
+    color: "white",
+    fontFamily: "Dosis",
+    fontWeight:'400',
+    fontSize:30,
+    marginTop:20
   }
 });
 export default LoginScreen;

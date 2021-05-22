@@ -63,7 +63,7 @@ class RegisterScreen extends React.Component {
                     <Item>
                         <Input placeholder="Confirmar contraseña"/>
                     </Item>
-                    <Button style={{marginTop: 30, marginLeft: 18, marginRight: 18}} title="Registrarse" mode="contained" />
+                    <Button style={{marginTop: 30, marginLeft: 18, marginRight: 18}} title="Registrarse" />
                 </Form>
             </Content>
         </Container>
