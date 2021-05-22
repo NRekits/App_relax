@@ -1,11 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   Button,
-  TextInput,
-  View,
   Text,
-  StatusBar,
-  TouchableOpacity,
   Alert,
   StyleSheet
 } from "react-native";

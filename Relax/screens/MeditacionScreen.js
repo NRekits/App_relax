@@ -9,7 +9,7 @@ import { Button ,TextInput,
 import { Container, Header, Title, Content, Footer, FooterTab, Button, Left, Right, Body, Icon, Text } from 'native-base';
 import SecureStore from 'expo-secure-store';
 
-class MecitacionScreen extends React.Component {
+class MeditacionScreen extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {

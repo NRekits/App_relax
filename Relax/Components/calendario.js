@@ -46,7 +46,6 @@ export default class Calendario extends React.Component {
                     DotTriunfos.push({key:`${item.nombre}`, color: TRIUNFOS_COLOR[`${item.nombre}`]});
                 })
             }
-            console.log(DotTriunfos);
 
             copy[`${item.fecha}`] = {selected: true, selectedColor: ESTADOS_COLOR[item.nombre], dots: [...DotTriunfos]};
             this.setState({estados: copy});
@@ -54,7 +53,7 @@ export default class Calendario extends React.Component {
     }
     render(){
         return (
-            <Container >
+            <Container style={{height: 400}}>
                 <Calendar
                     onDayPress={(day) => {this.props.pickUpDate(day)}}
                     markedDates={this.state.estados}
