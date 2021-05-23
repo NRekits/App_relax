@@ -5,7 +5,7 @@ const userSchema = mongoose.Schema({
         required: true,
 
     },
-    name: {
+    nombre: {
         type: String,
         required: true,
 
@@ -15,8 +15,8 @@ const userSchema = mongoose.Schema({
         required: true,
 
     },
-    Fecha: {
-        type: Date,
+    fecha: {
+       type: Date,
         required: true,
      
     }

@@ -22,10 +22,15 @@ mongoose.connect(uri,
 // import routes
 const authRoutes = require('./Routes/auth.js')
 const dashboadRoutes = require('./Routes/dashboard');
+const TRoutes = require('./Routes/TriunfoCrud.js')
+const ERoutes = require('./Routes/EstadoCrud.js')
+
 const verifyToken = require('./Routes/validate-token');
 
 // route middlewares
 app.use('/user',authRoutes);
+app.use('/Triunfo', TRoutes);
+app.use('/Estado', ERoutes);
 app.use('/dashboard', verifyToken, dashboadRoutes);
 
 // iniciar server
