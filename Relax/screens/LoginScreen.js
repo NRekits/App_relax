@@ -16,6 +16,9 @@ import { LinearGradient } from 'expo-linear-gradient';
 import IP_DB from "./../ip_address";
 import * as Font from "expo-font";
 
+//En la línea  57 es donde van los errores respecto a un error ocurrido en el momento de almacenar el token
+//En la línea 76 es donde van los errores respecto a algun problema con los datos del usuario ingresados (correo, contraseña)
+
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
@@ -49,9 +52,12 @@ class LoginScreen extends React.Component {
               this.setState({ error: false });
             })
             .catch((error) => {
+
               console.log(error);
               this.setState({ error: true }); // Aquí van los errores para ponerlo bonito
+              //En esta parte van los en caso de que el token no se haya logrado almacenar
               //No borrear el this.setState({error: true})
+
             })
             .finally(() => {
               console.log(this.state.error);
@@ -67,8 +73,12 @@ class LoginScreen extends React.Component {
         }
       })
       .catch((error) => {
+
         console.log(error);
-        this.setState({ error: true });
+        this.setState({ error: true }); // Aquí van los errores para ponerlo bonito
+        //Aquí van los errores que tengan que ver con el ingreso de los datos del usuario (contraseña y correo)
+        //No borrear el this.setState({error: true})
+
       });
   };
 
