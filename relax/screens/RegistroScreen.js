@@ -22,6 +22,9 @@ import { LinearGradient } from "expo-linear-gradient";
 import * as SecureStore from "expo-secure-store";
 import IP_DB from "./../ip_address";
 
+//En la línea  71 van a ir los errores con respecto a que las contraseñas no coincidan
+//En la línea 61 van a ir los errores en caso de que la bd no logre almacenar el registro (el correo no es válido)
+//El email ya esta registrado, hubo un problema con la codificación de la contraseña, no se pudo almacenar el registro
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 
@@ -56,6 +59,7 @@ class RegisterScreen extends React.Component {
         }).catch((e) => {
 
           this.setState({error: true}) // Dentro de esta función de manejan los errores
+          //Aquí van los errores que tengan que ver con algún problema de la base de datos no pueda almacenar el registro
           //Porfa, no borrar el this.setState({error: true})
 
         })
@@ -66,6 +70,7 @@ class RegisterScreen extends React.Component {
         });
 
     }else{
+      //En esta parte van los errores donde las contraseñas no coincidan
       Toast.show({
         text: 'Las contraseñas no coinciden',
         buttonText: 'Entendido',
