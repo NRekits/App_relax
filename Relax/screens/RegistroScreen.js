@@ -4,12 +4,15 @@ import { Text, StyleSheet, Dimensions } from "react-native";
 
 import {
   Container,
+  Content,
+  Form,
   Item,
   Input,
   Label,
   Title,
   Body,
   Button,
+  Header,
   Icon,
   Left,
   Right,
@@ -75,7 +78,9 @@ class RegisterScreen extends React.Component {
               onPress={() => {
                 this.props.navigation.navigate("Home")
               }}
+              
             >
+              
               <Text style={styles.Text2}>Continuar</Text>
 
             </Button>
@@ -133,6 +138,7 @@ const styles = StyleSheet.create({
   Button: {
     alignSelf: "center",
     marginTop: 20,
+    borderColor:'#9BFFA3'
   },
   Item: {
     marginTop: 30,
