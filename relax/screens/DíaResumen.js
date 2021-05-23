@@ -25,6 +25,7 @@ import { ESTADOS_COLOR, isDefined } from "./../CommonFunctions";
 import { LinearGradient } from "expo-linear-gradient";
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
+import {LoadingFull} from './../Components/Loading';
 
 export default class ReporteScreen extends React.Component {
   constructor(props) {
