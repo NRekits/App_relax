@@ -59,12 +59,12 @@ class App extends React.Component {
           <Stack.Navigator screenOptions={{
             headerShown: false
           }}
-            initialRouteName="Lista">
+            initialRouteName="Login">
             <Stack.Screen name="Login" component={LoginScreen} />
             <Stack.Screen name="Home" component={HomeScreen} />
             <Stack.Screen name="Registro" component={RegisterScreen} />
             <Stack.Screen name="Lista" component={ListaMeditacionesScreen} />
-            <Stack.Screen name="Meditacion" component={MeditacionScreen} />
+            <Stack.Screen name="meditacion" component={MeditacionScreen} />
           </Stack.Navigator>
         </NavigationContainer>
       );

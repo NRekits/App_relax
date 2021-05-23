@@ -46,7 +46,7 @@ export default class ListaMeditacionesScreen extends React.Component {
         button
         style={{ borderBottomWidth: 1 }}
         onPress={() =>
-          this.props.navigation.navigate("Meditacion", {
+          this.props.navigation.navigate("meditacion", {
             nombre: propis.nombre,
             descripcion: propis.descripcion,
             url: propis.url,

@@ -80,9 +80,10 @@ export default class AudioPlayer extends React.Component {
                     <View style={{flexDirection: 'row'}}>
 
                         { this.state.isLoading ? (<Text>Loading</Text>): (
-                        <Button bordered onPress={this.handlePlayPause}>
+                        <Button  rounded large onPress={this.handlePlayPause}
+                        style={styles.Button}>
                             {this.state.isPlaying ? (
-                                <Icon style={styles.control} name="pause" /> 
+                                <Icon style={styles.control} name="pause"  /> 
                             ): (
                                 <Icon style={styles.control} name="play" /> 
                             )}
@@ -99,6 +100,13 @@ export default class AudioPlayer extends React.Component {
 
 const styles = StyleSheet.create({
     controls: {
-        fontSize: 24
-    }
+        fontSize: 30
+    },
+    Button: {
+        alignSelf: "center",
+        backgroundColor:'#BB8FCE',
+        fontFamily:'Dosis',
+        fontWeight: "400",
+      },
+
 });
