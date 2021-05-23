@@ -199,7 +199,7 @@ class HomeScreen extends React.Component {
                 Estado &&
                 (isDefined(Estado.nombre) || isDefined(Estado.triunfos))
               ) {
-                this.props.navigation.navigate("reporte", {
+                this.props.navigation.navigate("Reporte", {
                   estado: Estado.nombre,
                   triunfos: [...triunfos],
                 });

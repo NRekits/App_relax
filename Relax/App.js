@@ -65,7 +65,7 @@ class App extends React.Component {
             <Stack.Navigator screenOptions={{
               headerShown: false
             }}
-              initialRouteName="CambiarTriunfo">
+              initialRouteName="Login">
               <Stack.Screen name="Login" component={LoginScreen} />
               <Stack.Screen name="Home" component={HomeScreen} />
               <Stack.Screen name="Registro" component={RegisterScreen} />
@@ -74,7 +74,7 @@ class App extends React.Component {
               <Stack.Screen name='Perfil' component={PerfilScreen} />
               <Stack.Screen name='Estado' component={EstadoScreen} />
               <Stack.Screen name='Triunfo' component={TriunfoScreen} />
-            <Stack.Screen name="Lista" component={ListaMeditacionesScreen} />
+              <Stack.Screen name="Lista" component={ListaMeditacionesScreen} />
               <Stack.Screen name='CambiarEstado' component={AddSintomaScreen} />
               <Stack.Screen name='CambiarTriunfo' component={AddTriunfoScreen} />
             </Stack.Navigator>
