@@ -42,7 +42,7 @@ export default class Calendario extends React.Component {
     render(){
         return (
             <Container style={{height: 400}}>
-                <Calendar
+                <Calendar 
                     onDayPress={(day) => {this.props.pickUpDate(day)}}
                     markedDates={this.state.estados}
                     markingType={'multi-dot'}

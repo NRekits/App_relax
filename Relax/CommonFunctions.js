@@ -3,16 +3,15 @@ export function isDefined(x){
     return x !== undefined;
 }
 export const ESTADOS_COLOR = {
-    "Ansioso": "#ED5565",
-    "Estresado": "#FC6E51",
-    "Triste": "#5D9CEC",
-    "Relajado": "#A0D468",
-    "Enojado": "#D8334A",
-    "Feliz": "#FFCE54",
-    "Emocionado": "#E8CE4D",
+    "Ansioso": "#F5B7B1",
+    "Estresado": "#EDBB99",
+    "Triste": "#AED6F1",
+    "Relajado": "#AED6F1",
+    "Enojado": "#DC7633",
+    "Feliz": "#F4D03F",
+    "Emocionado": "#F5B041",
     "Agradecido":"#EC87C0",
-    "Contento": "#E8CE4D",
-    "Cansado": "#656D78",
-    "Inseguro": "#8067B7",
-    "Aburrido": "#CCD1D9",
+    "Cansado": "#85929E",
+    "Inseguro": "#1ABC9C",
+    "Aburrido": "#B3B6B7",
 };

@@ -113,9 +113,7 @@ class HomeScreen extends React.Component {
     this.pickUpDate = this.pickUpDate.bind(this);
   }
   //rutas
-  goHome = () => {
-    this.props.navigation.navigate('Home');
-  }
+  
   goPerfil = () => {
     this.props.navigation.navigate('Perfil');
   }
@@ -123,10 +121,19 @@ class HomeScreen extends React.Component {
     this.props.navigation.navigate('Lista');
   }
   goEstado = () => {
-    //this.props.navigation.navigate();
+    this.props.navigation.navigate('Estado');
   }
   goTriunfos = () => {
     // this.props.navigation.navigate();
+  }
+  goLista = () => {
+    this.props.navigation.navigate('Lista');
+  }
+  goADDESTADO= () => {
+    this.props.navigation.navigate('CambiarEstado');
+  }
+  goADDTRIUNFO= () => {
+    this.props.navigation.navigate('CambiarTriunfo');
   }
   logout = () => {
     // log-out
@@ -253,10 +260,12 @@ class HomeScreen extends React.Component {
               paddingBottom: 10,
             }}
           >
-            <Button rounded style={styles.Button}>
+            <Button rounded style={styles.Button}
+            onPress={this.goADDESTADO}>
               <Text style={styles.Text2}>¿Cómo te sientes hoy?</Text>
             </Button>
-            <Button rounded style={styles.Button}>
+            <Button rounded style={styles.Button}
+            onPress={this.goADDTRIUNFO}>
               <Text style={styles.Text2}>¿Qué hiciste hoy?</Text>
             </Button>
           </Item>
@@ -264,7 +273,7 @@ class HomeScreen extends React.Component {
         <Footer>
           <FooterTab>
 
-            <Button style={styles.Button}
+            <Button active style={styles.Button}
               onPress={this.goPerfil}
             >
               <Icon name="person" />
@@ -274,11 +283,7 @@ class HomeScreen extends React.Component {
             >
               <Icon name="heart" />
             </Button>
-            <Button active style={styles.Button}
-              onPress={this.goHome}
-            >
-              <Icon active name="home" />
-            </Button>
+          
             <Button style={styles.Button}
               onPress={this.goTriunfos}
             >

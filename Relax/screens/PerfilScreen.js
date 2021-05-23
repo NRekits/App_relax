@@ -54,6 +54,7 @@ export default class PerfilScreen extends React.Component {
           </Body>
         </Header>
         <Content style={styles.Content}>
+         
           <H2 style={styles.H2}>
             Nombre: {' '}
             {this.state.nombre}
@@ -62,7 +63,7 @@ export default class PerfilScreen extends React.Component {
             Correo:{' '}
             {this.state.correo}
           </Text>
-          <Button style={styles.Button} onPress={this.cambiarcontra}>
+          <Button rounded style={styles.Button} onPress={this.cambiarcontra}>
             <Text>Cambiar Contraseña</Text>
           </Button>
         </Content>
@@ -83,6 +84,7 @@ const styles = StyleSheet.create({
       fontFamily: "Dosis",
       color: "white",
     },
+   
 
     background: {
       position: "absolute",
@@ -108,6 +110,7 @@ const styles = StyleSheet.create({
     },
     Button: {
         alignSelf: "center",
+        marginTop:20,
         backgroundColor:'#BB8FCE',
         fontFamily:'Dosis',
         fontWeight: "400",

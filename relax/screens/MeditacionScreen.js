@@ -65,7 +65,7 @@ class MeditacionScreen extends React.Component {
         </Header>
 
           <Content>
-            <Card>
+            <Card transparent style={{marginTop:20}}>
               <CardItem bordered>
                 <Left>
                   <Body>
@@ -104,6 +104,7 @@ const styles = StyleSheet.create({
   },
 
   Card: {
+
     fontWeight: "300",
     fontSize: 20,
     padding:15,
