@@ -7,8 +7,10 @@ import HomeScreen from './screens/HomeScreen';
 import RegisterScreen from './screens/RegistroScreen';
 import ListaMeditacionesScreen from './screens/CatmedScreen';
 import MeditacionScreen from './screens/MeditacionScreen';
+import ReporteScreen from './screens/DíaResumen';
 import * as Font from 'expo-font';
 import { Ionicons } from '@expo/vector-icons';
+import {Root} from 'native-base';
 
 const Stack = createStackNavigator();
 class App extends React.Component {
