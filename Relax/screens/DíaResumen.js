@@ -37,6 +37,9 @@ export default class ReporteScreen extends React.Component {
     };
   }
 
+  goBack = () => {
+    this.props.navigation.goBack();
+   }
   componentDidMount() {
     this.setState({
       estado: this.props.route.params.estado,
