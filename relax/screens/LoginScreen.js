@@ -54,7 +54,7 @@ class LoginScreen extends React.Component {
             .finally(() => {
               console.log(this.state.error);
               if (!this.state.error) {
-                this.props.navigation.navigate("home"); 
+                this.props.navigation.navigate("Home"); 
                 // Cuando finalice, nos vamos a la página de Home, en caso de que la petición fue exitosa
               }
             });

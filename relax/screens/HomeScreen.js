@@ -1,36 +1,44 @@
-import React, { useState } from 'react';
-import { Text, Dimensions, Alert, Image, StyleSheet } from "react-native";
+import React, { useState } from "react";
+import { Dimensions, Alert, Image, StyleSheet } from "react-native";
 import {
-  Container, Header,
-  Title, Content,
-  Footer, FooterTab,
-  Button, Left,
-  Right, Body,
-  Icon, Text, View,
-  Toast
-} from 'native-base';
-import Calendario from './../Components/calendario';
-import {isDefined} from './../CommonFunctions';
-const windowWidth = Dimensions.get('window').width;
-const windowHeight = Dimensions.get('window').height;
-const DATOS_PRUEBA = [
+  Container,
+  Header,
+  Title,
+  Content,
+  Button,
+  Left,
+  Right,
+  Body,
+  Icon,
+  Text,
+  Item,
+  Toast,
+  Footer,
+  FooterTab,
+} from "native-base";
+import Calendario from "./../Components/calendario";
+import { LinearGradient } from "expo-linear-gradient";
+import { isDefined } from "./../CommonFunctions";
+const windowWidth = Dimensions.get("window").width;
+const windowHeight = Dimensions.get("window").height;
 
+const DATOS_PRUEBA = [
   {
     nombre: "Ansioso",
     fecha: "2021-05-13",
-    triunfos: [{ nombre: "Completaste 5 meditaciones"}]
+    triunfos: [{ nombre: "Completaste 5 meditaciones" }],
   },
 
   {
     nombre: "Relajado",
     fecha: "2021-05-06",
-    triunfos: [{ nombre: "Meditación sin pausa"}]
+    triunfos: [{ nombre: "Meditación sin pausa" }],
   },
 
   {
     nombre: "Estresado",
     fecha: "2021-05-16",
-    triunfos: [{ nombre: "Completaste 5 meditaciones"}]
+    triunfos: [{ nombre: "Completaste 5 meditaciones" }],
   },
 
   {
@@ -56,7 +64,10 @@ const DATOS_PRUEBA = [
   {
     nombre: "Contento",
     fecha: "2021-05-09",
-    triunfos: [{ nombre: "Meditación sin pausa"}, { nombre: "Completaste 5 meditaciones"}]
+    triunfos: [
+      { nombre: "Meditación sin pausa" },
+      { nombre: "Completaste 5 meditaciones" },
+    ],
   },
 
   {
@@ -67,7 +78,7 @@ const DATOS_PRUEBA = [
   {
     nombre: "Agradecido",
     fecha: "2021-05-08",
-    triunfos: [{ nombre: "Meditación sin pausa"}]
+    triunfos: [{ nombre: "Meditación sin pausa" }],
   },
 
   {
@@ -78,9 +89,11 @@ const DATOS_PRUEBA = [
   {
     nombre: "Feliz",
     fecha: "2021-05-05",
-    triunfos: [{ nombre: "Completaste 5 meditaciones"}, { nombre: "Meditación sin pausa"}]
-  }
-
+    triunfos: [
+      { nombre: "Completaste 5 meditaciones" },
+      { nombre: "Meditación sin pausa" },
+    ],
+  },
 ];
 
 class HomeScreen extends React.Component {
@@ -88,10 +101,14 @@ class HomeScreen extends React.Component {
     super(props);
     let today = new Date();
     this.state = {
-      email: '',
-      password: '',
-      selectedDate: { day: today.getDate(), month: today.getMonth() + 1, year: today.getFullYear() },
-      estados: DATOS_PRUEBA
+      email: "",
+      password: "",
+      selectedDate: {
+        day: today.getDate(),
+        month: today.getMonth() + 1,
+        year: today.getFullYear(),
+      },
+      estados: DATOS_PRUEBA,
     };
     this.pickUpDate = this.pickUpDate.bind(this);
   }
@@ -116,62 +133,121 @@ class HomeScreen extends React.Component {
   */
 
   pickUpDate(date) {
-    this.setState({ selectedDate: { day: date.day, month: date.month, year: date.year } });
+    this.setState({
+      selectedDate: { day: date.day, month: date.month, year: date.year },
+    });
   }
-  componentDidMount() {
-
-  }
+  componentDidMount() {}
   render() {
     return (
-      <Container style={{justifyContent: 'center'}}>
-        <Header>
-          <Left>
-            <Button transparent>
-              <Icon name='menu' />
-            </Button>
-          </Left>
+      <Container style={styles.Container}>
+        <LinearGradient
+          // Background Linear Gradient
+          colors={["#00B0E8", "#BB8FCE"]}
+          style={styles.background}
+        />
+        <Header
+          transparent
+          androidStatusBarColor="#00B0E8"
+          style={styles.Header}
+        >
           <Body>
-            <Title>Header</Title>
+            <Title style={styles.Header}> Home </Title>
           </Body>
-          <Right />
+          <Right>
+            <Icon name="log-out" style={{ color: "white" }} />
+          </Right>
         </Header>
-        <Content>
-            <Calendario estados={this.state.estados} pickUpDate={this.pickUpDate} />
-            <Button style={{alignSelf: 'center'}} onPress={() => {
+
+        <Content >
+          <Calendario
+         
+            estados={this.state.estados}
+            pickUpDate={this.pickUpDate}
+          />
+          <Button rounded
+            style={styles.Button}
+            onPress={() => {
               let ListEstados = [...this.state.estados];
-              const FindDate = new Date( this.state.selectedDate.year , this.state.selectedDate.month-1, this.state.selectedDate.day-1);
+              const FindDate = new Date(
+                this.state.selectedDate.year,
+                this.state.selectedDate.month - 1,
+                this.state.selectedDate.day - 1
+              );
 
               const Estado = ListEstados.find((estado) => {
                 const EstadoDate = new Date(estado.fecha);
 
-                return ((EstadoDate.getDate() == FindDate.getDate()) &&
-                (EstadoDate.getFullYear() == FindDate.getFullYear()) &&
-                (EstadoDate.getMonth() == FindDate.getMonth()));
+                return (
+                  EstadoDate.getDate() == FindDate.getDate() &&
+                  EstadoDate.getFullYear() == FindDate.getFullYear() &&
+                  EstadoDate.getMonth() == FindDate.getMonth()
+                );
               });
 
               console.log(Estado);
               let triunfos = [];
-              if(Estado && isDefined(Estado.triunfos)){
+              if (Estado && isDefined(Estado.triunfos)) {
                 triunfos = [...Estado.triunfos];
               }
-              if (Estado && (isDefined(Estado.nombre) || isDefined(Estado.triunfos))){
-                this.props.navigation.navigate('reporte', {estado: Estado.nombre, triunfos: [...triunfos]});
-              }
-              else {
+              if (
+                Estado &&
+                (isDefined(Estado.nombre) || isDefined(Estado.triunfos))
+              ) {
+                this.props.navigation.navigate("reporte", {
+                  estado: Estado.nombre,
+                  triunfos: [...triunfos],
+                });
+              } else {
                 Toast.show({
-                  text: 'Seleccione un día valido para mirar el reporte',
-                  buttonText: 'Entendido',
+                  text: "Seleccione un día valido para mirar el reporte",
+                  buttonText: "Entendido",
                 });
               }
-              }}><Text style={{fontFamily: 'Mulish', fontWeight: '300'}}>Ver reporte del día</Text></Button>
-            <View style={{flex: 1, flexDirection: 'row', justifyContent: 'space-around', marginTop: 10, paddingBottom: 10}}>
-              <Button><Text>Añadir síntoma</Text></Button>
-              <Button><Text>Añadir estado</Text></Button>
-            </View>
+            }}
+          >
+            <Text style={styles.Text2}>
+              Ver reporte del día
+            </Text>
+          </Button>
+          <Item
+            style={{
+              flex: 1,
+              flexDirection: "row",
+              justifyContent: "space-around",
+              marginTop: 10,
+              paddingBottom: 10,
+            }}
+          >
+            <Button rounded style={styles.Button}>
+              <Text style={styles.Text2}>¿Cómo te sientes hoy?</Text>
+            </Button>
+            <Button rounded style={styles.Button}>
+              <Text style={styles.Text2}>¿Qué hiciste hoy?</Text>
+            </Button>
+          </Item>
         </Content>
         <Footer>
-         
-        </Footer>
+         <FooterTab>
+         <Button style={styles.Button}>
+             <Icon name="person" />
+           </Button>
+           <Button  style={styles.Button}>
+             <Icon name="heart" />
+           </Button>
+           <Button active style={styles.Button}>
+             <Icon active name="home" />
+           </Button>
+           <Button style={styles.Button}>
+             <Icon name="trophy" />
+           </Button>
+           <Button style={styles.Button}>
+             <Icon name="flame" />
+           </Button>
+          
+          
+         </FooterTab>
+       </Footer>
       </Container>
     );
   }
@@ -183,19 +259,15 @@ const styles = StyleSheet.create({
     flexDirection:'column',
     alignItems: "stretch",
     justifyContent: "center",
-    padding: 20,
     fontFamily: "Dosis",
     color: "white",
   },
-  Text: {
-    fontSize: 40,
-  },
+  
   Text2: {
-    marginTop: 5,
-    fontWeight:'400',
-    fontSize:20,
+
+    fontWeight: "300",
+    fontSize: 15,
     color: "white",
-    marginLeft: 5,
     fontFamily: "Dosis",
   },
   Text3: {
@@ -205,49 +277,30 @@ const styles = StyleSheet.create({
     marginLeft: 5,
     fontFamily: "Dosis",
   },
-  Image: {
-    alignSelf: "center",
-    marginBottom:10
-  },
-  Input: {
-    
-    alignSelf: "flex-start",
-    color: "white",
-    fontFamily: "Dosis",
-    fontWeight: "400",
-    fontSize: 20,
-    marginRight: 5,
-  },
+
+
   Button: {
-    alignSelf:'center',
-    marginTop: 20,
-  }, 
-  Label:{
-    color: "white",
-    fontFamily: "Dosis",
-    fontWeight:'400',
-    fontSize:20,
-    marginRight:5,
-    marginBottom: 10,
- 
-  },
-  Item:{
-    padding:5,
-    marginTop:30,
-  },
-  H1:{
     alignSelf: "center",
-    color: "white",
-    fontFamily: "Dosis",
-    fontWeight:'400',
-    fontSize:30,
-    marginTop:20
+    backgroundColor:'#BB8FCE',
+    fontFamily:'Dosis',
+    fontWeight: "400",
+  },
+  
+  Item: {
+    padding: 5, 
   },
   background: {
-    position: 'absolute',
+    position: "absolute",
     left: 0,
     right: 0,
     top: 0,
-    height: windowHeight,
-  }
+    height: 80,
+  },
+  Header: {
+    color: "#C4EFFF",
+    fontFamily: "Dosis",
+    fontSize: 40,
+    fontWeight: "600",
+    alignSelf: "center",
+  },
 });

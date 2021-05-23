@@ -39,7 +39,6 @@ class RegisterScreen extends React.Component {
     return (
       <Container style={styles.Container}>
         <LinearGradient
-          // Background Linear Gradient
           colors={["#00B0E8", "#BB8FCE"]}
           style={styles.background}
         />
