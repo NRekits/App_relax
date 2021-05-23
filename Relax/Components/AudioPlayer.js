@@ -3,8 +3,9 @@ import {
     Container, Content,
     Button, Icon, Text
 } from 'native-base';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, Image } from 'react-native';
 import {Audio} from 'expo-av';
+import Loading from './../Components/Loading';
 
 export default class AudioPlayer extends React.Component {
     constructor(props){
@@ -22,8 +23,7 @@ export default class AudioPlayer extends React.Component {
         this.setState({url: this.props.url});
 
         try{
-            await Audio.setAudioModeAsync({
-                allowsRecordingIOS: false,
+            await Audio.setAudioModeAsync({ allowsRecordingIOS: false,
                 interruptionModeIOS: Audio.INTERRUPTION_MODE_IOS_DO_NOT_MIX,
                 playsInSilentModeIOS: true,
                 interruptionModeAndroid: Audio.INTERRUPTION_MODE_ANDROID_DUCK_OTHERS,
@@ -48,8 +48,6 @@ export default class AudioPlayer extends React.Component {
             const source = {
                 uri: url
             };
-            console.log(url);
-
             const status = {
                 shouldPlay: isPlaying,
                 volume
@@ -79,7 +77,7 @@ export default class AudioPlayer extends React.Component {
                 <Content>
                     <View style={{flexDirection: 'row'}}>
 
-                        { this.state.isLoading ? (<Text>Loading</Text>): (
+                        { this.state.isLoading ? (<Loading color={"black"} />): (
                         <Button  rounded large onPress={this.handlePlayPause}
                         style={styles.Button}>
                             {this.state.isPlaying ? (

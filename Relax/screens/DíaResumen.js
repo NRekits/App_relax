@@ -10,7 +10,8 @@ import {
     Card, CardItem
 } from 'native-base';
 
-import { ESTADOS_COLOR, isDefined } from './../CommonFunctions';
+import { ESTADOS_COLOR, isDefined} from './../CommonFunctions';
+import {LoadingFull} from './../Components/Loading';
 
 export default class ReporteScreen extends React.Component {
     constructor(props) {
@@ -25,8 +26,7 @@ export default class ReporteScreen extends React.Component {
     componentDidMount() {
         this.setState({
             estado: this.props.route.params.estado,
-            triunfos: [...this.props.route.params.triunfos],
-            isLoading: false
+            triunfos: [...this.props.route.params.triunfos]
         })
     }
 
@@ -40,9 +40,7 @@ export default class ReporteScreen extends React.Component {
     }
     render() {
         if (this.state.isLoading) {
-            return (<Container>
-                <Text>Is Loading</Text>
-            </Container>);
+            return (<LoadingFull />);
         } else {
             const {triunfos, estado} = this.state;
             return (

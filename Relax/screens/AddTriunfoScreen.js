@@ -1,24 +1,18 @@
 import React from "react";
 import { Dimensions, Alert, Image, StyleSheet } from "react-native";
 import {
-  Container,
-  Content,
-  Header,
-  Left,
-  Form,
-  Text,
-  Button,
-  Body,
-  Icon,
-  Title,
-  Item,
-  Input,
-  Textarea,
-  Label,
-} from "native-base";
-import RNDateTimePicker from "@react-native-community/datetimepicker";
-import { LinearGradient } from "expo-linear-gradient";
-import { set } from "react-native-reanimated";
+    Container, Content,
+    Header, Left,
+    Form, Text,
+    Button, Body,
+    Icon, Title,
+    Item, Input,
+    Textarea,
+    Label,
+} from 'native-base';
+import RNDateTimePicker from '@react-native-community/datetimepicker';
+import { set } from 'react-native-reanimated';
+import {LoadingFull} from './../Components/Loading';
 
 export default class AddTriunfoScreen extends React.Component {
   constructor(props) {

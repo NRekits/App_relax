@@ -1,22 +1,17 @@
 import React from "react";
 import { Dimensions, StyleSheet } from "react-native";
 import {
-  Container,
-  Content,
-  Header,
-  Icon,
-  Left,
-  Body,
-  Button,
-  Title,
-  Card,
-  CardItem,
-  Text,
-} from "native-base";
+    Container, Content,
+    Header, Icon,
+    Left, Body,
+    Button, Title,
+    Card, CardItem,
+    Text
+} from 'native-base';
+import { ESTADOS_COLOR} from './../CommonFunctions';
+import {LoadingFull} from './../Components/Loading';
 
 import { LinearGradient } from "expo-linear-gradient";
-import { ESTADOS_COLOR } from "./../CommonFunctions";
-
 export default class EstadoScreen extends React.Component {
   todayDate = () => {
     const fecha = new Date();

@@ -18,6 +18,7 @@ import * as Font from "expo-font";
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
+
 class LoginScreen extends React.Component {
   constructor(props) {
     super(props);
@@ -139,6 +140,7 @@ class LoginScreen extends React.Component {
   }
 }
 const styles = StyleSheet.create({
+
   Container: {
     flex: 1,
     flexDirection:'column',
@@ -148,6 +150,7 @@ const styles = StyleSheet.create({
     fontFamily: "Dosis",
     color: "white",
   },
+
   Text: {
     fontSize: 40,
   },

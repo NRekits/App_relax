@@ -1,5 +1,5 @@
 import React from 'react';
-import { Dimensions, StyleSheet } from "react-native";
+import { Dimensions, Image, StyleSheet } from "react-native";
 import {
   Container, Header,
   Title, Content,
@@ -11,9 +11,10 @@ import {
 } from 'native-base';
 
 import AudioPlayer from './../Components/AudioPlayer';
+import {LoadingFull} from './../Components/Loading';
 
 import { LinearGradient } from "expo-linear-gradient";
-import { isDefined } from "./../CommonFunctions";
+import { LoadingGif } from "./../CommonFunctions";
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 class MeditacionScreen extends React.Component {
@@ -39,7 +40,7 @@ class MeditacionScreen extends React.Component {
   render() {
     if (this.state.isLoading) {
       return (
-        <Container><Text>Is Loading</Text></Container>
+        <LoadingFull />
       );
     }
     else {

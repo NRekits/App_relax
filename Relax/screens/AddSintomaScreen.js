@@ -8,7 +8,7 @@ import {
     Textarea
 } from 'native-base';
 import {View, Picker} from 'react-native';
-
+import {LoadingFull} from './../Components/Loading';
 
 export default class AddSintomaScreen extends React.Component {
     constructor(props) {
@@ -35,7 +35,7 @@ export default class AddSintomaScreen extends React.Component {
         }
         if (isLoading) {
             return (
-                <Container><Text>Is Loading</Text></Container>
+                <LoadingFull />
             );
         }
         else {
