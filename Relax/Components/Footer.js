@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { Text, Dimensions, Alert, Image, StyleSheet } from "react-native";
+import { NavigationContainer} from '@react-navigation/native';
+import { createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {
   Container,
   Header,
