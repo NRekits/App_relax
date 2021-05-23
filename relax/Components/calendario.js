@@ -9,21 +9,9 @@ LocaleConfig.locales['mx'] = {
 }
 LocaleConfig.defaultLocale = 'mx';
 import {Container}  from 'native-base';
-import {isDefined} from './../CommonFunctions';
-const ESTADOS_COLOR = {
-    "Ansioso": "#ED5565",
-    "Estresado": "#FC6E51",
-    "Triste": "#5D9CEC",
-    "Relajado": "#A0D468",
-    "Enojado": "#D8334A",
-    "Feliz": "#FFCE54",
-    "Emocionado": "#E8CE4D",
-    "Agradecido":"#EC87C0",
-    "Contento": "#E8CE4D",
-    "Cansado": "#656D78",
-    "Inseguro": "#8067B7",
-    "Aburrido": "#CCD1D9",
-};
+import {isDefined, ESTADOS_COLOR} from './../CommonFunctions';
+
+
 const TRIUNFOS_COLOR = {
     "Meditación sin pausa": "#7c7b89",
     "Completaste 5 meditaciones": "#4e4423"
