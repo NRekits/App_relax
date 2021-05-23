@@ -54,7 +54,8 @@ class LoginScreen extends React.Component {
             .finally(() => {
               console.log(this.state.error);
               if (!this.state.error) {
-                this.props.navigation.navigate("home"); // Cuando finalice, nos vamos a la página de Home, en caso de que la petición fue exitosa
+                this.props.navigation.navigate("home"); 
+                // Cuando finalice, nos vamos a la página de Home, en caso de que la petición fue exitosa
               }
             });
         } catch (e) {
@@ -74,7 +75,7 @@ class LoginScreen extends React.Component {
         <Header transparent  androidStatusBarColor="#00B0E8"/>
         <LinearGradient
         // Background Linear Gradient
-        colors={['#00B0E8', '#08799C']}
+        colors={['#00B0E8', '#BB8FCE']}
         style={styles.background}
       />
         <Image
@@ -85,11 +86,11 @@ class LoginScreen extends React.Component {
         <Content>
           <Form>
             <Item floatingLabel style={styles.Item}>
-              <Label   style={styles.Input}>Correo</Label>
+              <Label   style={styles.Label}>Correo</Label>
               <Input
                 label="Email"
                 value={this.state.email}
-             
+                style={styles.Input}
                 onChangeText={(text) => {
                   this.setState({ email: text });
                 }}
@@ -97,17 +98,18 @@ class LoginScreen extends React.Component {
             </Item>
 
             <Item floatingLabel style={styles.Item}>
-              <Label style={styles.Input}>Contraseña</Label>
+              <Label style={styles.Label}>Contraseña</Label>
 
               <Input
                 label="password"
                 secureTextEntry={true}
+                style={styles.Input}
                 value={this.state.password}
                 onChangeText={(text) => {
                   this.setState({ password: text });
 
                 }}
-                style={{alignSelf:'stretch'}}
+              
               />
             </Item>
 
@@ -159,7 +161,7 @@ const styles = StyleSheet.create({
   Text3: {
     marginTop: 10,
     fontSize: 15,
-    color: "rgb(183,215,222)",
+    color: "#C4EFFF",
     marginLeft: 5,
     fontFamily: "Dosis",
   },
@@ -168,19 +170,29 @@ const styles = StyleSheet.create({
     marginBottom:10
   },
   Input: {
-    alignSelf:"flex-start",
+    
+    alignSelf: "flex-start",
+    color: "white",
+    fontFamily: "Dosis",
+    fontWeight: "400",
+    fontSize: 20,
+    marginRight: 5,
+  },
+  Button: {
+    alignSelf:'center',
+    marginTop: 20,
+  }, 
+  Label:{
     color: "white",
     fontFamily: "Dosis",
     fontWeight:'400',
     fontSize:20,
     marginRight:5,
-    marginBottom:10
-  },
-  Button: {
-    alignSelf:'center',
-    marginTop: 20,
+    marginBottom: 10,
+ 
   },
   Item:{
+    padding:5,
     marginTop:30,
   },
   H1:{

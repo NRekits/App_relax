@@ -1,88 +1,163 @@
 import React from "react";
 
-import {
-  Text,
-  StyleSheet,
-  Button
-} from "react-native";
+import { Text, StyleSheet, Dimensions } from "react-native";
 
 import {
   Container,
-  Header,
-  Content,
-  Form,
   Item,
   Input,
   Label,
+  Title,
+  Body,
+  Button,
+  Icon,
+  Left,
+  Right,
 } from "native-base";
+import { LinearGradient } from "expo-linear-gradient";
 import * as SecureStore from "expo-secure-store";
 import IP_DB from "./../ip_address";
+
+const windowWidth = Dimensions.get("window").width;
+const windowHeight = Dimensions.get("window").height;
 
 class RegisterScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-        email: '',
-        name: '',
-        password: '',
-        confirmPassword: ''
+      email: "",
+      name: "",
+      password: "",
+      confirmPassword: "",
     };
   }
-  /*
-    fetchJsonGetMethod() {
-      return fetch('https://reactnative.dev/movies.json', {method: 'POST',
-    method: 'POST',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-      firstParam: 'yourValue',
-      secondParam: 'yourOtherValue'
-    })
-    }).then((res) => res.json())
-      .then((data) => {this.setState({email: data.movies[0].title, password: data.movies[1].title})})
-      .catch((error) => console.error(error))
-      .finally(() => console.log(this.state.email, this.state.password));
-    }
-  */
+
   render() {
     return (
-        <Container style={{paddingTop: 50}}>
-            <Content>
-                <Form>
-                    <Item>
-                        <Input placeholder="Nombre completo"/>
-                    </Item>
-                    <Item>
-                        <Input placeholder="Correo electrónico"/>
-                    </Item>
-                    <Item>
-                        <Input placeholder="Contraseña"/>
-                    </Item>
-                    <Item>
-                        <Input placeholder="Confirmar contraseña"/>
-                    </Item>
-                    <Button style={{marginTop: 30, marginLeft: 18, marginRight: 18}} title="Registrarse" />
-                </Form>
-            </Content>
-        </Container>
+      <Container style={styles.Container}>
+        <LinearGradient
+          // Background Linear Gradient
+          colors={["#00B0E8", "#BB8FCE"]}
+          style={styles.background}
+        />
+        <Header transparent androidStatusBarColor="#00B0E8">
+          <Left />
+          <Body>
+            <Title style={styles.Header}>Registro</Title>
+          </Body>
+          <Right />
+        </Header>
+
+        <Content style={styles.Content}>
+          <Form>
+            <Item floatingLabel style={styles.Item}>
+              <Label style={styles.Label}>Nombre</Label>
+              <Input  
+              style={styles.Input}/>
+            </Item>
+            <Item floatingLabel style={styles.Item}>
+              <Label style={styles.Label}>Correo electrónico</Label>
+              <Input style={styles.Input}/>
+            </Item>
+            <Item floatingLabel style={styles.Item}>
+              <Label style={styles.Label}>Contraseña</Label>
+              <Input style={styles.Input} />
+            </Item>
+            <Item floatingLabel style={styles.Item}>
+              <Label style={styles.Label}>Confirmar contraseña</Label>
+              <Input style={styles.Input} />
+            </Item>
+            <Button block
+              bordered
+              rounded
+              success
+              style={styles.Button}
+              onPress={() => {
+                this.props.navigation.navigate("Home")
+              }}
+            >
+              <Text style={styles.Text2}>Continuar</Text>
+
+            </Button>
+          </Form>
+        </Content>
+      </Container>
     );
   }
 }
 const styles = StyleSheet.create({
   Container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-
+    flexDirection: "column",
+    alignItems: "stretch",
+    justifyContent: "center",
+    padding: 20,
+    fontFamily: "Dosis",
+    color: "white",
   },
-  fgwhite: {
-    color: 'white'
+  Text2: {
+    marginTop: 5,
+    fontWeight: "400",
+    fontSize: 20,
+    color: "white",
+    marginLeft: 5,
+    fontFamily: "Dosis",
   },
-  Text: {
-    fontSize: 40
-  }
+  Text3: {
+    marginTop: 10,
+    fontSize: 15,
+    color: "#C4EFFF",
+    marginLeft: 5,
+    fontFamily: "Dosis",
+  },
+  Image: {
+    alignSelf: "center",
+    marginBottom: 10,
+  },
+  Input: {
+    alignSelf: "flex-start",
+    color: "white",
+    fontFamily: "Dosis",
+    fontWeight: "400",
+    fontSize: 20,
+    marginRight: 5,
+  },
+  Label: {
+    color: "white",
+    fontFamily: "Dosis",
+    fontWeight: "400",
+    fontSize: 20,
+    padding:10,
+    marginBottom: 10,
+  },
+  Button: {
+    alignSelf: "center",
+    marginTop: 20,
+  },
+  Item: {
+    marginTop: 30,
+    padding:5,
+  },
+  H1: {
+    alignSelf: "center",
+    color: "white",
+    fontFamily: "Dosis",
+    fontWeight: "400",
+    fontSize: 30,
+    marginTop: 20,
+  },
+  background: {
+    position: "absolute",
+    left: 0,
+    right: 0,
+    top: 0,
+    height: windowHeight,
+  },
+  Header: {
+    color: "#C4EFFF",
+    fontFamily: "Dosis",
+    fontSize: 40,
+    fontWeight: "600",
+  },
 });
 export default RegisterScreen;
