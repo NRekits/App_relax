@@ -43,6 +43,10 @@ export default class AddTriunfoScreen extends React.Component {
 
     render() {
         const { nombre, descripcion, isLoading, isModification, selectedHours, selectedMinutes } = this.state;
+        let Action = "Añadir";
+        if(isModification){
+            Action = "Cambiar"
+        }
         if (isLoading) {
             return (
                 <Container><Text>Is Loading</Text></Container>
@@ -59,9 +63,7 @@ export default class AddTriunfoScreen extends React.Component {
                             </Button>
                         </Left>
                         <Body>
-                            {isModification ? (<Title>Cambiar triunfo</Title>) :
-                                (<Title>Añadir triunfo</Title>)
-                            }
+                            <Title>{Action} triunfo</Title>
                         </Body>
                     </Header>
                     <Content padder>
@@ -83,7 +85,7 @@ export default class AddTriunfoScreen extends React.Component {
                         </Form>
 
                         <Button full>
-                            <Text>Agregar</Text>
+                            <Text>{Action}</Text>
                         </Button>
                     </Content>
                 </Container>
