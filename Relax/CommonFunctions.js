@@ -7,15 +7,15 @@ export const LoadingGif = {
     'https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fstatic.demilked.com%2Fwp-content%2Fuploads%2F2016%2F06%2Fgif-animations-replace-loading-screen-14.gif&f=1&nofb=1'
 };
 export const ESTADOS_COLOR = {
-    "Ansioso": "#F5B7B1",
-    "Estresado": "#EDBB99",
+    "Ansios@": "#F5B7B1",
+    "Estresad@": "#EDBB99",
     "Triste": "#AED6F1",
-    "Relajado": "#AED6F1",
-    "Enojado": "#DC7633",
+    "Relajad@": "#AED6F1",
+    "Enojad@": "#DC7633",
     "Feliz": "#F4D03F",
-    "Emocionado": "#F5B041",
-    "Agradecido":"#EC87C0",
-    "Cansado": "#85929E",
-    "Inseguro": "#1ABC9C",
-    "Aburrido": "#B3B6B7",
+    "Emocionad@": "#F5B041",
+    "Agradecid@":"#EC87C0",
+    "Cansad@": "#85929E",
+    "Insegur@": "#1ABC9C",
+    "Aburrid@": "#B3B6B7",
 };

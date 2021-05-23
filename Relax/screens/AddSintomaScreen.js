@@ -1,88 +1,194 @@
-import React from 'react';
+import React from "react";
 import {
-    Container, Content,
-    Header, Left,
-    Form, Text,
-    Button, Body,
-    Icon, Title,
-    Textarea
-} from 'native-base';
-import {View, Picker} from 'react-native';
-import {LoadingFull} from './../Components/Loading';
+  Container,
+  Content,
+  Header,
+  Left,
+  Form,
+  Text,
+  Button,
+  Body,
+  Icon,
+  Title,
+  Textarea,
+} from "native-base";
+import { View, Picker } from "react-native";
+import { LoadingFull } from "./../Components/Loading";
+
+import { Dimensions, StyleSheet } from "react-native";
+
+import { LinearGradient } from "expo-linear-gradient";
+const windowWidth = Dimensions.get("window").width;
+const windowHeight = Dimensions.get("window").height;
 
 export default class AddSintomaScreen extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            estado: "Ansioso",
-            descripcion: '',
-            isLoading: true,
-            isModification: false,
-            selected: undefined
-        }
+  constructor(props) {
+    super(props);
+    this.state = {
+      estado: "Selecciona un estado",
+      descripcion: "",
+      isLoading: true,
+      isModification: false,
+      selected: undefined,
+    };
+  }
+  goBack = () => {
+    this.props.navigation.goBack();
+   }
+  componentDidMount() {
+    this.setState({ isLoading: false });
+  }
+  onValueChange(value) {
+    this.setState({ selected: value });
+  }
+  render() {
+    const { estado, descripcion, isLoading, isModification, selected } =
+      this.state;
+    let Action = "Añadir";
+    if (isModification) {
+      Action = "Cambiar";
     }
-    componentDidMount() {
-        this.setState({ isLoading: false });
-    }
-    onValueChange(value) {
-        this.setState({ selected: value })
-    }
-    render() {
-        const { estado, descripcion, isLoading, isModification, selected } = this.state;
-        let Action = "Añadir"
-        if (isModification){
-            Action = "Cambiar"
-        }
-        if (isLoading) {
-            return (
-                <LoadingFull />
-            );
-        }
-        else {
-            return (
+    if (isLoading) {
+      return <LoadingFull />;
+    } else {
+      return (
+        <Container>
+          <LinearGradient
+            // Background Linear Gradient
+            colors={["#00B0E8", "#BB8FCE"]}
+            style={styles.background}
+          />
+          <Header transparent androidStatusBarColor="#00B0E8">
+            <Body>
+              <Title style={styles.Header}>
+                {" "}
+                <Button iconRight transparent>
+                  <Icon
+                    name="arrow-back"
+                    style={{ color: "white" }}
+                    onPress={this.goBack}
+                  />
+                </Button>{" "}
+                {Action} Estado
+              </Title>
+            </Body>
+          </Header>
 
-                <Container>
-                    <Header>
-                        <Left>
-                            <Button>
-                                <Icon name="menu" />
-                            </Button>
-                        </Left>
-                        <Body>
-                            <Title>{Action} Estado</Title>
-                        </Body>
-                    </Header>
-                    <Content padder>
-                        <Form>
-
-                            <View>
-                                <Picker selectedValue={selected}
-                                    mode="dropdown"
-                                    enabled={true}
-                                    onValueChange={(value, index) => {
-                                        this.setState({ selected: value });
-                                    }}
-                                >
-                                    <Picker.Item label="Ansioso" value="Ansioso" />
-                                    <Picker.Item label="Estresado" value="Estresado" />
-                                    <Picker.Item label="Triste" value="Triste" />
-                                    <Picker.Item label="Relajado" value="Relajado" />
-                                    <Picker.Item label="Enojado" value="Enojado" />
-                                    <Picker.Item label="Feliz" value="Feliz" />
-                                    <Picker.Item label="Emocionado" value="Emocionado" />
-                                    <Picker.Item label="Agradecido" value="Agradecido" />
-                                    <Picker.Item label="Contento" value="Contento" />
-                                    <Picker.Item label="Cansado" value="Cansado" />
-                                    <Picker.Item label="Inseguro" value="Inseguro" />
-                                    <Picker.Item label="Aburrido" value="Aburrido" />
-                                </Picker>
-                            </View>
-                            <Textarea bordered placeholder="Describe como te sientes" rowSpan={8} />
-                            <Button full><Text>{Action}</Text></Button>
-                        </Form>
-                    </Content>
-                </Container>
-            );
-        }
+          <Content padder>
+            <Form>
+              <View style={styles.Item}>
+                <Picker
+                  selectedValue={selected}
+                  style={styles.PickerItem}
+                  mode="dropdown"
+                  enabled={true}
+                  onValueChange={(value, index) => {
+                    this.setState({ selected: value });
+                  }}
+                >
+                  <Picker.Item label="Ansios@" value="Ansios@" />
+                  <Picker.Item label="Estresad@" value="Estresad@" />
+                  <Picker.Item label="Triste" value="Triste" />
+                  <Picker.Item label="Relajad@" value="Relajad@" />
+                  <Picker.Item label="Enojad@" value="Enojad@" />
+                  <Picker.Item label="Feliz" value="Feliz" />
+                  <Picker.Item label="Emocionad@" value="Emocionad@" />
+                  <Picker.Item label="Agradecid@" value="Agradecid@" />
+                  <Picker.Item label="Cansad@" value="Cansad@" />
+                  <Picker.Item label="Insegur@" value="Insegur@" />
+                  <Picker.Item label="Aburrid@" value="Aburrid@" />
+                </Picker>
+              </View>
+              <Textarea
+                style={styles.Textarea}
+                bordered
+                placeholder="¿Cómo te sientes hoy?"
+                rowSpan={8}
+              />
+              <Button  block rounded style={styles.Button}>
+                <Text>{Action}</Text>
+              </Button>
+            </Form>
+          </Content>
+        </Container>
+      );
     }
+  }
 }
+const styles = StyleSheet.create({
+    Content: {
+      marginTop: 40,
+    },
+    Container: {
+      flex: 1,
+      flexDirection: "column",
+      alignItems: "stretch",
+      justifyContent: "center",
+      fontFamily: "Dosis",
+      color: "white",
+      padding:10,
+    },
+    Item: {
+      marginTop: 30,
+      padding: 10,
+    },
+    Input: {
+
+      fontFamily: "Dosis",
+      fontWeight: "400",
+      fontSize: 20,
+      marginRight: 5,
+    },
+    PickerItem: {
+      color: "#BB8FCE",
+      fontFamily: "Dosis",
+      fontWeight: "400",
+      fontSize: 25,
+      padding: 10,
+      marginBottom: 0,
+    },
+    background: {
+      position: "absolute",
+      left: 0,
+      right: 0,
+      top: 0,
+      height: 100,
+    },
+    Header: {
+      color: "#C4EFFF",
+      fontFamily: "Dosis",
+      fontSize: 40,
+      fontWeight: "600",
+      alignSelf: "flex-start",
+    },
+    H2: {
+      textAlign: "center",
+      color: "#BB8FCE",
+      fontFamily: "Dosis",
+      fontWeight: "400",
+      fontSize: 25,
+      marginTop: 5,
+    },
+    Button: {
+      alignSelf: "center",
+      backgroundColor: "#BB8FCE",
+      marginTop: 20,
+    },
+    Text: {
+      textAlign: "center",
+      color: "#BB8FCE",
+      fontFamily: "Dosis",
+      fontWeight: "400",
+      fontSize: 25,
+      marginTop: 5,
+    },
+    Textarea: {
+      textAlign: "left",
+      fontFamily: "Dosis",
+      fontWeight: "400",
+      borderRadius:20,
+      padding:5,
+      fontSize: 20,
+
+    },
+  });

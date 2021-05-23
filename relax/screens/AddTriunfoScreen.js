@@ -214,6 +214,7 @@ const styles = StyleSheet.create({
       fontWeight: "400",
       borderRadius:20,
       fontSize: 20,
+      padding:5,
 
     },
   });
