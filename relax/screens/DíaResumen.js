@@ -45,7 +45,6 @@ export default class ReporteScreen extends React.Component {
             </Container>);
         } else {
             const {triunfos, estado} = this.state;
-            console.log(triunfos);
             return (
                 <Container>
                     <Header>
