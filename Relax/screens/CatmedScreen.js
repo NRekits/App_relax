@@ -11,7 +11,6 @@ import {
   List,
   Right,
   Button
-  
 } from "native-base";
 
 import { LinearGradient } from "expo-linear-gradient";

@@ -19,24 +19,26 @@ import {
 import Calendario from "./../Components/calendario";
 import { LinearGradient } from "expo-linear-gradient";
 import { isDefined } from "./../CommonFunctions";
+import * as SecureStore from 'expo-secure-store';
+
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 
 const DATOS_PRUEBA = [
   {
-    nombre: "Ansioso",
+    nombre: "Ansios@",
     fecha: "2021-05-13",
     triunfos: [{ nombre: "Completaste 5 meditaciones" }],
   },
 
   {
-    nombre: "Relajado",
+    nombre: "Relajad@",
     fecha: "2021-05-06",
     triunfos: [{ nombre: "Meditación sin pausa" }],
   },
 
   {
-    nombre: "Estresado",
+    nombre: "Estresad@",
     fecha: "2021-05-16",
     triunfos: [{ nombre: "Completaste 5 meditaciones" }],
   },
@@ -47,22 +49,22 @@ const DATOS_PRUEBA = [
   },
 
   {
-    nombre: "Cansado",
+    nombre: "Cansad@",
     fecha: "2021-05-18",
   },
 
   {
-    nombre: "Inseguro",
+    nombre: "Insegur@",
     fecha: "2021-05-15",
   },
 
   {
-    nombre: "Emocionado",
+    nombre: "Emocionad@",
     fecha: "2021-05-07",
   },
 
   {
-    nombre: "Contento",
+    nombre: "Content@",
     fecha: "2021-05-09",
     triunfos: [
       { nombre: "Meditación sin pausa" },
@@ -71,18 +73,18 @@ const DATOS_PRUEBA = [
   },
 
   {
-    nombre: "Aburrido",
+    nombre: "Aburrid@",
     fecha: "2021-05-19",
   },
 
   {
-    nombre: "Agradecido",
+    nombre: "Agradecid@",
     fecha: "2021-05-08",
     triunfos: [{ nombre: "Meditación sin pausa" }],
   },
 
   {
-    nombre: "Enojado",
+    nombre: "Enojad@",
     fecha: "2021-05-14",
   },
 
@@ -109,6 +111,7 @@ class HomeScreen extends React.Component {
         year: today.getFullYear(),
       },
       estados: DATOS_PRUEBA,
+      error: false
     };
     this.pickUpDate = this.pickUpDate.bind(this);
   }
@@ -134,6 +137,13 @@ class HomeScreen extends React.Component {
   }
   logout = () => {
     // log-out
+    SecureStore.deleteItemAsync('token').then(() => {this.setState({error: false})})
+    .catch((error) => {
+      console.error(error); // aqui es para poner bonito el mensaje de error en caso de que no se haya podido eliminar
+      this.setState({error: true});
+    }).finally(() => {
+      this.props.navigation.navigate('Login');
+    });
   }
   /*
     fetchJsonGetMethod() {
@@ -229,7 +239,7 @@ class HomeScreen extends React.Component {
           <Right
           //Poner ruta a log-out
           >
-          <Button iconLeft transparent >
+          <Button iconLeft transparent onPress={this.logout.bind(this)} >
              <Icon name="log-out" style={{ color: "white" }} />
           </Button>
            
