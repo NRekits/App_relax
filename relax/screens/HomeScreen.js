@@ -151,10 +151,15 @@ class HomeScreen extends React.Component {
           androidStatusBarColor="#00B0E8"
           style={styles.Header}
         >
+          <Left>
+          <Icon name="home" style={{ color: "white" }} />
+          </Left>
           <Body>
-            <Title style={styles.Header}> Home </Title>
+            <Title style={styles.Header}> HOME </Title>
           </Body>
-          <Right>
+          <Right
+          //Poner ruta a log-out
+          >
             <Icon name="log-out" style={{ color: "white" }} />
           </Right>
         </Header>
@@ -229,19 +234,30 @@ class HomeScreen extends React.Component {
         </Content>
         <Footer>
          <FooterTab>
-         <Button style={styles.Button}>
+           
+         <Button style={styles.Button}
+         //poner ruta a perfil
+         >
              <Icon name="person" />
            </Button>
-           <Button  style={styles.Button}>
+           <Button  style={styles.Button}
+           //poner ruta a Estado
+           >
              <Icon name="heart" />
            </Button>
-           <Button active style={styles.Button}>
+           <Button active style={styles.Button}
+           //Poner ruta a home
+           >
              <Icon active name="home" />
            </Button>
-           <Button style={styles.Button}>
+           <Button style={styles.Button}
+           //Poner ruta a triunfos
+           >
              <Icon name="trophy" />
            </Button>
-           <Button style={styles.Button}>
+           <Button style={styles.Button}
+           //Poner ruta a meditaciones
+           >
              <Icon name="flame" />
            </Button>
           
