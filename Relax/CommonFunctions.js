@@ -2,7 +2,6 @@ export function isDefined(x){
     let undefined;
     return x !== undefined;
 }
-
 export const ESTADOS_COLOR = {
     "Ansioso": "#ED5565",
     "Estresado": "#FC6E51",

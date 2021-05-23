@@ -20,7 +20,6 @@ const schemaLogin = Joi.object({
 })
 
 router.post('/register', async (req, res) => {
-
     try{
         // validate user
         const { error } = schemaRegister.validate(req.body)

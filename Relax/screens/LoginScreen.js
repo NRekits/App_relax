@@ -49,7 +49,8 @@ class LoginScreen extends React.Component {
             })
             .catch((error) => {
               console.log(error);
-              this.setState({ error: true });
+              this.setState({ error: true }); // Aquí van los errores para ponerlo bonito
+              //No borrear el this.setState({error: true})
             })
             .finally(() => {
               console.log(this.state.error);
