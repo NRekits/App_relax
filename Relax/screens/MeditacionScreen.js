@@ -1,5 +1,5 @@
 import React from 'react';
-import { Dimensions, Alert, Image, StyleSheet } from "react-native";
+import { Dimensions, StyleSheet } from "react-native";
 import {
   Container, Header,
   Title, Content,
@@ -31,24 +31,10 @@ class MeditacionScreen extends React.Component {
     this.setState({ nombre: this.props.route.params.nombre, descripcion: this.props.route.params.descripcion, isLoading: false, url: this.props.route.params.url});
   }
 
-  /*
-    fetchJsonGetMethod() {
-      return fetch('https://reactnative.dev/movies.json', {method: 'POST',
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        firstParam: 'yourValue',
-        secondParam: 'yourOtherValue'
-      })
-    }).then((res) => res.json())
-      .then((data) => {this.setState({email: data.movies[0].title, password: data.movies[1].title})})
-      .catch((error) => console.error(error))
-      .finally(() => console.log(this.state.email, this.state.password));
-    }
-  */
+ 
+  goBack = () => {
+    this.props.navigation.goBack();
+  }
 
   render() {
     if (this.state.isLoading) {
@@ -71,7 +57,7 @@ class MeditacionScreen extends React.Component {
               <Icon
                 name="arrow-back"
                 style={{ color: "white" }}
-                //ruta go back
+                onPress={this.goBack}
               />{" "}
               Meditación
             </Title>

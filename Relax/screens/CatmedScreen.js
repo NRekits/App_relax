@@ -40,6 +40,10 @@ export default class ListaMeditacionesScreen extends React.Component {
   constructor(props) {
     super(props);
   }
+  
+  goBack = () => {
+    this.props.navigation.goBack();
+   }
   Item = (propis) => {
     return (
       <ListItem
@@ -77,7 +81,7 @@ export default class ListaMeditacionesScreen extends React.Component {
               <Icon
                 name="arrow-back"
                 style={{ color: "white" }}
-                //ruta go back
+                onPress={this.goBack}
               />{" "}
               Meditación
             </Title>

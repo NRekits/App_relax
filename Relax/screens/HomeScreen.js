@@ -112,7 +112,25 @@ class HomeScreen extends React.Component {
     };
     this.pickUpDate = this.pickUpDate.bind(this);
   }
-
+//rutas
+  goHome = () => {
+    this.props.navigation.navigate('Home');
+   }
+   goPerfil = () => {
+    this.props.navigation.navigate('Perfil');
+   }
+   goLista = () => {
+    this.props.navigation.navigate('Lista');
+   }
+   goEstado = () => {
+    //this.props.navigation.navigate();
+   }
+   goTriunfos = () => {
+   // this.props.navigation.navigate();
+   }
+   logout = () => {
+    // log-out
+    }
   /*
     fetchJsonGetMethod() {
       return fetch('https://reactnative.dev/movies.json', {method: 'POST',
@@ -236,27 +254,27 @@ class HomeScreen extends React.Component {
          <FooterTab>
            
          <Button style={styles.Button}
-         //poner ruta a perfil
+          onPress={this.goPerfil}
          >
              <Icon name="person" />
            </Button>
            <Button  style={styles.Button}
-           //poner ruta a Estado
+            onPress={this.goEstado}
            >
              <Icon name="heart" />
            </Button>
            <Button active style={styles.Button}
-           //Poner ruta a home
+           onPress={this.goHome}
            >
              <Icon active name="home" />
            </Button>
            <Button style={styles.Button}
-           //Poner ruta a triunfos
+             onPress={this.goTriunfos}
            >
              <Icon name="trophy" />
            </Button>
            <Button style={styles.Button}
-           //Poner ruta a meditaciones
+            onPress={this.goLista}
            >
              <Icon name="flame" />
            </Button>

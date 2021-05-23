@@ -13,6 +13,7 @@ import EstadoScreen from './screens/EstadoScreen';
 import TriunfoScreen from './screens/TriunfoScreen';
 import AddSintomaScreen from './screens/AddSintomaScreen';
 import AddTriunfoScreen from './screens/AddTriunfoScreen';
+import contraScreen from './screens/cambiarcontraScreen';
 import * as Font from 'expo-font';
 import { Ionicons } from '@expo/vector-icons';
 import { Root } from 'native-base';
@@ -65,7 +66,7 @@ class App extends React.Component {
             <Stack.Navigator screenOptions={{
               headerShown: false
             }}
-              initialRouteName="Login">
+              initialRouteName='Home'>
               <Stack.Screen name="Login" component={LoginScreen} />
               <Stack.Screen name="Home" component={HomeScreen} />
               <Stack.Screen name="Registro" component={RegisterScreen} />
@@ -77,6 +78,7 @@ class App extends React.Component {
               <Stack.Screen name="Lista" component={ListaMeditacionesScreen} />
               <Stack.Screen name='CambiarEstado' component={AddSintomaScreen} />
               <Stack.Screen name='CambiarTriunfo' component={AddTriunfoScreen} />
+              <Stack.Screen name='CambiarContraseña' component={contraScreen} />
             </Stack.Navigator>
           </NavigationContainer>
         </Root>
