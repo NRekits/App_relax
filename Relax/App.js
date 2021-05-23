@@ -59,7 +59,7 @@ class App extends React.Component {
           }}
             initialRouteName="Login">
             <Stack.Screen name="Login" component={LoginScreen} />
-            <Stack.Screen name="home" component={HomeScreen} />
+            <Stack.Screen name="Home" component={HomeScreen} />
             <Stack.Screen name="Registro" component={RegisterScreen} />
             <Stack.Screen name="lista" component={ListaMeditacionesScreen} />
             <Stack.Screen name="meditacion" component={MeditacionScreen} />
