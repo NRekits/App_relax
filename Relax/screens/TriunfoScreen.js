@@ -77,11 +77,12 @@ export default class TriunfoScreen extends React.Component {
             <Body>
               <Title style={styles.Header}>
                 {" "}
-                <Icon
-                  name="arrow-back"
-                  style={{ color: "white" }}
-                  onPress={this.goBack}
-                />{" "}
+                <Button iconRight transparent >
+              <Icon
+                name="arrow-back"
+                style={{ color: "white" }}
+                onPress={this.goBack}
+              /></Button>{" "}
                 Triunfo
               </Title>
             </Body>

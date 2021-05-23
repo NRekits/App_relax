@@ -76,12 +76,13 @@ export default class EstadoScreen extends React.Component {
           <Header transparent androidStatusBarColor="#00B0E8">
             <Body>
               <Title style={styles.Header}>
-                {" "}
-                <Icon
-                  name="arrow-back"
-                  style={{ color: "white" }}
-                  onPress={this.goBack}
-                />{" "}
+             
+              <Button iconRight transparent >
+              <Icon
+                name="arrow-back"
+                style={{ color: "white", fontSize:30 }}
+                onPress={this.goBack}
+              /></Button>{" "}{" "}
                 Estado
               </Title>
             </Body>

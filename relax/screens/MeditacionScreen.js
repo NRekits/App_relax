@@ -54,11 +54,12 @@ class MeditacionScreen extends React.Component {
           <Body>
             <Title style={styles.Header}>
               {" "}
+              <Button iconRight transparent >
               <Icon
                 name="arrow-back"
                 style={{ color: "white" }}
                 onPress={this.goBack}
-              />{" "}
+              /></Button>{" "}
               Meditación
             </Title>
           </Body>

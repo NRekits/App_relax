@@ -123,9 +123,6 @@ class HomeScreen extends React.Component {
   goEstado = () => {
     this.props.navigation.navigate('Estado');
   }
-  goTriunfos = () => {
-    // this.props.navigation.navigate();
-  }
   goLista = () => {
     this.props.navigation.navigate('Lista');
   }
@@ -232,7 +229,10 @@ class HomeScreen extends React.Component {
           <Right
           //Poner ruta a log-out
           >
-            <Icon name="log-out" style={{ color: "white" }} />
+          <Button iconLeft transparent >
+             <Icon name="log-out" style={{ color: "white" }} />
+          </Button>
+           
           </Right>
         </Header>
 
@@ -273,21 +273,16 @@ class HomeScreen extends React.Component {
         <Footer>
           <FooterTab>
 
-            <Button active style={styles.Button}
-              onPress={this.goPerfil}
-            >
-              <Icon name="person" />
-            </Button>
+            
             <Button style={styles.Button}
               onPress={this.goEstado}
             >
               <Icon name="heart" />
             </Button>
-          
-            <Button style={styles.Button}
-              onPress={this.goTriunfos}
+            <Button active style={styles.Button}
+              onPress={this.goPerfil}
             >
-              <Icon name="trophy" />
+              <Icon name="person" />
             </Button>
             <Button style={styles.Button}
               onPress={this.goLista}

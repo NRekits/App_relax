@@ -86,11 +86,12 @@ export default class AddTriunfoScreen extends React.Component {
             <Body>
               <Title style={styles.Header}>
                 {" "}
-                <Icon
-                  name="arrow-back"
-                  style={{ color: "white" }}
-                  onPress={this.goBack}
-                />{" "}
+                <Button iconRight transparent >
+              <Icon
+                name="arrow-back"
+                style={{ color: "white" }}
+                onPress={this.goBack}
+              /></Button>{" "}
                 {Action} Triunfo
               </Title>
             </Body>
@@ -101,6 +102,7 @@ export default class AddTriunfoScreen extends React.Component {
               <Item floatingLabel style={styles.Item}>
                 <Label style={styles.Label}>¿Qué triunfo cumpliste hoy?</Label>
                 <Input
+                    style={styles.Input}
                   value={nombre}
                   onChangeText={(text) => {
                     this.setState({ nombre: text });
@@ -164,7 +166,7 @@ const styles = StyleSheet.create({
     },
     Input: {
       alignSelf: "flex-start",
-      color: "#BB8FCE",
+   
       fontFamily: "Dosis",
       fontWeight: "400",
       fontSize: 20,
@@ -219,7 +221,7 @@ const styles = StyleSheet.create({
       fontWeight: "400",
       borderRadius:20,
       fontSize: 20,
-      color: "#C4EFFF",
+
     },
   });
   
