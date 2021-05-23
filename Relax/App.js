@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { Container, Text } from 'native-base';
+import { Container, Content } from 'native-base';
 import LoginScreen from './screens/LoginScreen';
 import HomeScreen from './screens/HomeScreen';
 import PerfilScreen from './screens/PerfilScreen';
@@ -15,8 +15,9 @@ import AddSintomaScreen from './screens/AddSintomaScreen';
 import AddTriunfoScreen from './screens/AddTriunfoScreen';
 import contraScreen from './screens/cambiarcontraScreen';
 import * as Font from 'expo-font';
-import { Ionicons } from '@expo/vector-icons';
+import { Ionicons, FontAwesome } from '@expo/vector-icons';
 import { Root } from 'native-base';
+import {LoadingFull} from './Components/Loading';
 
 const Stack = createStackNavigator();
 class App extends React.Component {
@@ -49,6 +50,7 @@ class App extends React.Component {
       "Dosis": require('./assets/dosis.ttf'),
       "Mulish": require('./assets/mulish.ttf'),
       ...Ionicons.font,
+      ...FontAwesome.font
     }).finally(() => { this.setState({ isLoading: false }) });
   }
 
@@ -56,7 +58,7 @@ class App extends React.Component {
 
     if (this.state.isLoading) {
       return (
-        <Container><Text>Is Loading</Text></Container>
+        <LoadingFull />
       );
     }
     else {

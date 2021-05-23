@@ -1,19 +1,14 @@
 import React from "react";
 import { Dimensions, StyleSheet } from "react-native";
 import {
-  Container,
-  Content,
-  Header,
-  Icon,
-  Left,
-  Body,
-  Button,
-  Title,
-  Card,
-  CardItem,
-  Text,
-  Right,
-} from "native-base";
+    Container, Content,
+    Header, Icon,
+    Left, Body,
+    Button, Title,
+    Card, CardItem,
+    Text, Right
+} from 'native-base';
+import {LoadingFull} from './../Components/Loading';
 import { LinearGradient } from "expo-linear-gradient";
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
