@@ -72,7 +72,9 @@ router.post('/login', async (req, res) => {
         res.json({
             error: null,
             data: 'exito bienvenido',
-            token: token
+            token: token,
+            id: user._id
+            
         });
 
     }catch(e){

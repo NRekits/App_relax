@@ -5,10 +5,6 @@ const userSchema = mongoose.Schema({
         required: true,
 
     },
-    id_estado:{
-        type: String,
-    required: true,
-    },
     name: {
         type: String,
         required: true,

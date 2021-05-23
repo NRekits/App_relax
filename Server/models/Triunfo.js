@@ -5,10 +5,7 @@ const userSchema = mongoose.Schema({
         required: true,
 
     },
-    id_triunfo:{
-        type: String,
-        required: true,
-    },
+   
     name: {
         type: String,
         required: true,
