@@ -112,25 +112,25 @@ class HomeScreen extends React.Component {
     };
     this.pickUpDate = this.pickUpDate.bind(this);
   }
-//rutas
+  //rutas
   goHome = () => {
     this.props.navigation.navigate('Home');
-   }
-   goPerfil = () => {
+  }
+  goPerfil = () => {
     this.props.navigation.navigate('Perfil');
-   }
-   goLista = () => {
+  }
+  goLista = () => {
     this.props.navigation.navigate('Lista');
-   }
-   goEstado = () => {
+  }
+  goEstado = () => {
     //this.props.navigation.navigate();
-   }
-   goTriunfos = () => {
-   // this.props.navigation.navigate();
-   }
-   logout = () => {
+  }
+  goTriunfos = () => {
+    // this.props.navigation.navigate();
+  }
+  logout = () => {
     // log-out
-    }
+  }
   /*
     fetchJsonGetMethod() {
       return fetch('https://reactnative.dev/movies.json', {method: 'POST',
@@ -155,7 +155,54 @@ class HomeScreen extends React.Component {
       selectedDate: { day: date.day, month: date.month, year: date.year },
     });
   }
-  componentDidMount() {}
+
+  selectDate(date, today) {
+
+    let ListEstados = [...this.state.estados];
+    const FindDate = new Date(
+      date.year,
+      date.month - 1,
+      date.day - 1
+    );
+    const Estado = ListEstados.find((estado) => {
+      const EstadoDate = new Date(estado.fecha);
+      return (
+        EstadoDate.getDate() == FindDate.getDate() &&
+        EstadoDate.getFullYear() == FindDate.getFullYear() &&
+        EstadoDate.getMonth() == FindDate.getMonth()
+      );
+    });
+    let triunfos = [];
+    if (Estado && isDefined(Estado.triunfos)) {
+      triunfos = [...Estado.triunfos];
+    }
+    if (
+      Estado &&
+      (isDefined(Estado.nombre) || isDefined(Estado.triunfos))
+    ) {
+      this.props.navigation.navigate("Reporte", {
+        estado: Estado.nombre,
+        triunfos: [...triunfos],
+      });
+    } else {
+      if (today) {
+        Toast.show({
+          text: "No ha agredado un estado para el día de hoy",
+          buttonText: "Entendido",
+        });
+      }
+      else {
+        Toast.show({
+          text: "Seleccione un día valido para mirar el reporte",
+          buttonText: "Entendido",
+        });
+      }
+    }
+  }
+  selectDateCalendar = (date) => {
+    this.selectDate(date, false);
+  }
+  componentDidMount() { }
   render() {
     return (
       <Container style={styles.Container}>
@@ -170,7 +217,7 @@ class HomeScreen extends React.Component {
           style={styles.Header}
         >
           <Left>
-          <Icon name="home" style={{ color: "white" }} />
+            <Icon name="home" style={{ color: "white" }} />
           </Left>
           <Body>
             <Title style={styles.Header}> HOME </Title>
@@ -184,49 +231,13 @@ class HomeScreen extends React.Component {
 
         <Content >
           <Calendario
-         
             estados={this.state.estados}
-            pickUpDate={this.pickUpDate}
+            pickUpDate={this.selectDateCalendar.bind(this)}
           />
           <Button rounded
             style={styles.Button}
             onPress={() => {
-              let ListEstados = [...this.state.estados];
-              const FindDate = new Date(
-                this.state.selectedDate.year,
-                this.state.selectedDate.month - 1,
-                this.state.selectedDate.day - 1
-              );
-
-              const Estado = ListEstados.find((estado) => {
-                const EstadoDate = new Date(estado.fecha);
-
-                return (
-                  EstadoDate.getDate() == FindDate.getDate() &&
-                  EstadoDate.getFullYear() == FindDate.getFullYear() &&
-                  EstadoDate.getMonth() == FindDate.getMonth()
-                );
-              });
-
-              console.log(Estado);
-              let triunfos = [];
-              if (Estado && isDefined(Estado.triunfos)) {
-                triunfos = [...Estado.triunfos];
-              }
-              if (
-                Estado &&
-                (isDefined(Estado.nombre) || isDefined(Estado.triunfos))
-              ) {
-                this.props.navigation.navigate("Reporte", {
-                  estado: Estado.nombre,
-                  triunfos: [...triunfos],
-                });
-              } else {
-                Toast.show({
-                  text: "Seleccione un día valido para mirar el reporte",
-                  buttonText: "Entendido",
-                });
-              }
+              this.selectDate(new Date(), true);
             }}
           >
             <Text style={styles.Text2}>
@@ -251,37 +262,35 @@ class HomeScreen extends React.Component {
           </Item>
         </Content>
         <Footer>
-         <FooterTab>
-           
-         <Button style={styles.Button}
-          onPress={this.goPerfil}
-         >
-             <Icon name="person" />
-           </Button>
-           <Button  style={styles.Button}
-            onPress={this.goEstado}
-           >
-             <Icon name="heart" />
-           </Button>
-           <Button active style={styles.Button}
-           onPress={this.goHome}
-           >
-             <Icon active name="home" />
-           </Button>
-           <Button style={styles.Button}
-             onPress={this.goTriunfos}
-           >
-             <Icon name="trophy" />
-           </Button>
-           <Button style={styles.Button}
-            onPress={this.goLista}
-           >
-             <Icon name="flame" />
-           </Button>
-          
-          
-         </FooterTab>
-       </Footer>
+          <FooterTab>
+
+            <Button style={styles.Button}
+              onPress={this.goPerfil}
+            >
+              <Icon name="person" />
+            </Button>
+            <Button style={styles.Button}
+              onPress={this.goEstado}
+            >
+              <Icon name="heart" />
+            </Button>
+            <Button active style={styles.Button}
+              onPress={this.goHome}
+            >
+              <Icon active name="home" />
+            </Button>
+            <Button style={styles.Button}
+              onPress={this.goTriunfos}
+            >
+              <Icon name="trophy" />
+            </Button>
+            <Button style={styles.Button}
+              onPress={this.goLista}
+            >
+              <Icon name="flame" />
+            </Button>
+          </FooterTab>
+        </Footer>
       </Container>
     );
   }
@@ -290,13 +299,13 @@ export default HomeScreen;
 const styles = StyleSheet.create({
   Container: {
     flex: 1,
-    flexDirection:'column',
+    flexDirection: 'column',
     alignItems: "stretch",
     justifyContent: "center",
     fontFamily: "Dosis",
     color: "white",
   },
-  
+
   Text2: {
 
     fontWeight: "300",
@@ -315,13 +324,13 @@ const styles = StyleSheet.create({
 
   Button: {
     alignSelf: "center",
-    backgroundColor:'#BB8FCE',
-    fontFamily:'Dosis',
+    backgroundColor: '#BB8FCE',
+    fontFamily: 'Dosis',
     fontWeight: "400",
   },
-  
+
   Item: {
-    padding: 5, 
+    padding: 5,
   },
   background: {
     position: "absolute",
