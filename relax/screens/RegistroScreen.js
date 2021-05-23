@@ -16,6 +16,7 @@ import {
   Icon,
   Left,
   Right,
+  Toast,
 } from "native-base";
 import { LinearGradient } from "expo-linear-gradient";
 import * as SecureStore from "expo-secure-store";
@@ -32,7 +33,46 @@ class RegisterScreen extends React.Component {
       name: "",
       password: "",
       confirmPassword: "",
+      error: false
     };
+  }
+
+  Register = () => {
+    if (this.state.password === this.state.confirmPassword) {
+      fetch(`http://${IP_DB}:3000/user/register`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            name: this.state.name,
+            email: this.state.email,
+            password: this.state.password
+          })
+        }).then((res) => res.json())
+        .then(() => {
+          this.setState({error: false})
+        }).catch((e) => {
+
+          this.setState({error: true}) // Dentro de esta función de manejan los errores
+          //Porfa, no borrar el this.setState({error: true})
+
+        })
+        .finally(() => {
+          if(!this.state.error){
+            this.props.navigation.navigate('Login');
+          }
+        });
+
+    }else{
+      Toast.show({
+        text: 'Las contraseñas no coinciden',
+        buttonText: 'Entendido',
+        type:'danger'
+      })
+    }
+
   }
 
   render() {
@@ -54,34 +94,48 @@ class RegisterScreen extends React.Component {
           <Form>
             <Item floatingLabel style={styles.Item}>
               <Label style={styles.Label}>Nombre</Label>
-              <Input  
-              style={styles.Input}/>
+              <Input
+                value={this.state.name}
+                onChangeText={(text) => {
+                  this.setState({ name: text })
+                }}
+                style={styles.Input} />
             </Item>
             <Item floatingLabel style={styles.Item}>
               <Label style={styles.Label}>Correo electrónico</Label>
-              <Input style={styles.Input}/>
+              <Input
+                value={this.state.email}
+                onChangeText={(text) => {
+                  this.setState({ email: text })
+                }}
+                style={styles.Input} />
             </Item>
             <Item floatingLabel style={styles.Item}>
               <Label style={styles.Label}>Contraseña</Label>
-              <Input style={styles.Input} />
+              <Input
+                value={this.state.password}
+                onChangeText={(text) => {
+                  this.setState({ password: text })
+                }}
+                style={styles.Input} />
             </Item>
             <Item floatingLabel style={styles.Item}>
               <Label style={styles.Label}>Confirmar contraseña</Label>
-              <Input style={styles.Input} />
+              <Input
+                value={this.state.confirmPassword}
+                onChangeText={(text) => {
+                  this.setState({ confirmPassword: text })
+                }}
+                style={styles.Input} />
             </Item>
             <Button block
               bordered
               rounded
               success
               style={styles.Button}
-              onPress={() => {
-                this.props.navigation.navigate("Home")
-              }}
-              
+              onPress={this.Register}
             >
-              
               <Text style={styles.Text2}>Continuar</Text>
-
             </Button>
           </Form>
         </Content>
@@ -131,17 +185,17 @@ const styles = StyleSheet.create({
     fontFamily: "Dosis",
     fontWeight: "400",
     fontSize: 20,
-    padding:10,
+    padding: 10,
     marginBottom: 10,
   },
   Button: {
     alignSelf: "center",
     marginTop: 20,
-    borderColor:'#9BFFA3'
+    borderColor: '#9BFFA3'
   },
   Item: {
     marginTop: 30,
-    padding:5,
+    padding: 5,
   },
   H1: {
     alignSelf: "center",
