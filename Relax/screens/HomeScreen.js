@@ -11,7 +11,8 @@ import {
 } from 'native-base';
 import Calendario from './../Components/calendario';
 import {isDefined} from './../CommonFunctions';
-
+const windowWidth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
 const DATOS_PRUEBA = [
 
   {
