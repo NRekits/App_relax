@@ -3,31 +3,30 @@ const Estado =require('../models/Estado')
 
 
 
-router.post('/añadir', async (req, res) => {
-    try{   
-  
-
+router.post('/insertar', (req, res) => {
+   
         const estado = new Estado({
-            id_user:req.body.id_user,
+            iduser:req.body.iduser,
             nombre: req.body.nombre,
             descripcion:req.body.descripcion,
             fecha: req.body.fecha
          
         });
 
-        const savedEstado = await estado.save();
-        res.json({
-            error: null,
-            data: savedEstado
-        });
+        estado.save()
+        .then(doc=>{
+            console.log('dato insertado',doc)
+            res.json({response:'exito'})
+        })
+        .catch (err=>{
+            console.log("error al insertar", err.message)
+        }) 
 
-    } catch (error) {
-        res.status(400).json({error})
-    }
-})
+    
+        })
 
 
-router.get('/Estadopordía/id:/mes:', async (req, res) => {
+router.get('/Estadopormes/id:/mes:', (req, res) => {
     const id= req.params.id
     const mes= req.params.mes
     try {

@@ -1,12 +1,11 @@
 const mongoose = require('mongoose');
 const userSchema = mongoose.Schema({
-    id_user:{
+    iduser:{
         type: String,
         required: true,
 
     },
-   
-    name: {
+    nombre: {
         type: String,
         required: true,
 
@@ -16,7 +15,7 @@ const userSchema = mongoose.Schema({
         required: true,
 
     },
-    Fecha: {
+    fecha: {
         type: Date,
         required: true,
      
@@ -24,4 +23,4 @@ const userSchema = mongoose.Schema({
  
 })
 
-module.exports = mongoose.model('Estado', userSchema, 'Estado');
+module.exports = mongoose.model('Triunfo', userSchema, 'Triunfo');
