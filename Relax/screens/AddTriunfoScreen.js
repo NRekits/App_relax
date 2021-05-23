@@ -13,6 +13,7 @@ import {
 import RNDateTimePicker from '@react-native-community/datetimepicker';
 import { set } from 'react-native-reanimated';
 import {LoadingFull} from './../Components/Loading';
+import {LinearGradient} from 'expo-linear-gradient';
 
 export default class AddTriunfoScreen extends React.Component {
   constructor(props) {
@@ -64,9 +65,7 @@ export default class AddTriunfoScreen extends React.Component {
     }
     if (isLoading) {
       return (
-        <Container>
-          <Text>Is Loading</Text>
-        </Container>
+          <LoadingFull />
       );
     } else {
       return (

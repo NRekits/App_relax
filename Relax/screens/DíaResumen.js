@@ -26,7 +26,8 @@ export default class ReporteScreen extends React.Component {
     componentDidMount() {
         this.setState({
             estado: this.props.route.params.estado,
-            triunfos: [...this.props.route.params.triunfos]
+            triunfos: [...this.props.route.params.triunfos],
+            isLoading: false
         })
     }
 
