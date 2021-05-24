@@ -3,9 +3,9 @@ const Estado =require('../models/Estado')
 
 
 
-router.post('/insertar', (req, res) => {
+router.post('/insertar', async (req, res) => {
    
-        const estado = new Estado({
+        const estado =  new Estado({
             iduser:req.body.iduser,
             nombre: req.body.nombre,
             descripcion:req.body.descripcion,
@@ -13,7 +13,7 @@ router.post('/insertar', (req, res) => {
          
         });
 
-        estado.save()
+        await estado.save()
         .then(doc=>{
             console.log('dato insertado',doc)
             res.json({response:'exito'})
@@ -26,15 +26,10 @@ router.post('/insertar', (req, res) => {
         })
 
 
-router.get('/Estadopormes/id:/mes:', (req, res) => {
+router.get('/Estadopormes/id:/fecha:', (req, res) => {
     const id= req.params.id
-    const mes= req.params.mes
-    try {
-       
-
-    }catch(e){
-        return status(400).json({error: "Hubo un error en el login, por favor intenta de nuevo"})
-    }
+    const fecha= req.params.fecha
+  
 
 
 
