@@ -14,6 +14,7 @@ import {
 } from "native-base";
 import { View, Picker } from "react-native";
 import { LoadingFull } from "./../Components/Loading";
+import {IP_DB} from './../ip_address';
 
 import { Dimensions, StyleSheet } from "react-native";
 
@@ -25,24 +26,63 @@ export default class AddSintomaScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      estado: "Selecciona un estado",
+      id: '',
+      estado: "Ansios@",
       descripcion: "",
       isLoading: true,
       isModification: false,
-      selected: undefined,
+      error: false
     };
   }
+
+  addEstado = () => {
+    const today= new Date();
+    fetch(`http://${IP_DB}:3000/Estado/insertar`,
+    {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        iduser: this.state.id,
+        nombre: this.state.estado,
+        descripcion: this.state.descripcion,
+        fecha: today.toISOString()
+      })
+    })
+    .then((res) => res.json())
+    .then((res) => {
+      this.setState({error: false});
+      console.log(res);
+    })
+    .catch((error) => {
+      console.error(error);
+      this.setState({error: true})
+    })
+    .finally(() => {
+        console.log({
+        idUser: this.state.id,
+        nombre: this.state.estado,
+        descripcion: this.state.descripcion,
+        fecha: today.toISOString()
+      });
+      if(!this.state.error){
+        this.props.navigation.navigate('Home', {id: this.state.id});
+      }
+    });
+  }
+
   goBack = () => {
     this.props.navigation.goBack();
    }
   componentDidMount() {
-    this.setState({ isLoading: false });
+    this.setState({id: this.props.route.params.id,  isLoading: false });
   }
   onValueChange(value) {
     this.setState({ selected: value });
   }
   render() {
-    const { estado, descripcion, isLoading, isModification, selected } =
+    const { estado, descripcion, isLoading, isModification } =
       this.state;
     let Action = "Añadir";
     if (isModification) {
@@ -78,12 +118,12 @@ export default class AddSintomaScreen extends React.Component {
             <Form>
               <View style={styles.Item}>
                 <Picker
-                  selectedValue={selected}
+                  selectedValue={estado}
                   style={styles.PickerItem}
                   mode="dropdown"
                   enabled={true}
                   onValueChange={(value, index) => {
-                    this.setState({ selected: value });
+                    this.setState({ estado: value });
                   }}
                 >
                   <Picker.Item label="Ansios@" value="Ansios@" />
@@ -101,11 +141,17 @@ export default class AddSintomaScreen extends React.Component {
               </View>
               <Textarea
                 style={styles.Textarea}
+                value={descripcion}
                 bordered
                 placeholder="¿Cómo te sientes hoy?"
                 rowSpan={8}
+                onChangeText={(text) => {
+                  this.setState({descripcion: text})
+                }}
               />
-              <Button  block rounded style={styles.Button}>
+              <Button  block rounded style={styles.Button} onPress={() => {
+                this.addEstado(this.state.estado, this.state.descripcion, new Date());
+              }}>
                 <Text>{Action}</Text>
               </Button>
             </Form>
