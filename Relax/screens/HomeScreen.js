@@ -20,103 +20,32 @@ import Calendario from "./../Components/calendario";
 import { LinearGradient } from "expo-linear-gradient";
 import { isDefined } from "./../CommonFunctions";
 import * as SecureStore from 'expo-secure-store';
+import { LoadingFull } from './../Components/Loading';
+import IP_DB from './../ip_address';
 
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 
-const DATOS_PRUEBA = [
-  {
-    nombre: "Ansios@",
-    fecha: "2021-05-13",
-    triunfos: [{ nombre: "Completaste 5 meditaciones" }],
-  },
-
-  {
-    nombre: "Relajad@",
-    fecha: "2021-05-06",
-    triunfos: [{ nombre: "Meditación sin pausa" }],
-  },
-
-  {
-    nombre: "Estresad@",
-    fecha: "2021-05-16",
-    triunfos: [{ nombre: "Completaste 5 meditaciones" }],
-  },
-
-  {
-    nombre: "Triste",
-    fecha: "2021-05-17",
-  },
-
-  {
-    nombre: "Cansad@",
-    fecha: "2021-05-18",
-  },
-
-  {
-    nombre: "Insegur@",
-    fecha: "2021-05-15",
-  },
-
-  {
-    nombre: "Emocionad@",
-    fecha: "2021-05-07",
-  },
-
-  {
-    nombre: "Content@",
-    fecha: "2021-05-09",
-    triunfos: [
-      { nombre: "Meditación sin pausa" },
-      { nombre: "Completaste 5 meditaciones" },
-    ],
-  },
-
-  {
-    nombre: "Aburrid@",
-    fecha: "2021-05-19",
-  },
-
-  {
-    nombre: "Agradecid@",
-    fecha: "2021-05-08",
-    triunfos: [{ nombre: "Meditación sin pausa" }],
-  },
-
-  {
-    nombre: "Enojad@",
-    fecha: "2021-05-14",
-  },
-
-  {
-    nombre: "Feliz",
-    fecha: "2021-05-05",
-    triunfos: [
-      { nombre: "Completaste 5 meditaciones" },
-      { nombre: "Meditación sin pausa" },
-    ],
-  },
-];
 
 class HomeScreen extends React.Component {
   constructor(props) {
     super(props);
     let today = new Date();
     this.state = {
-      email: "",
-      password: "",
+      id: "",
       selectedDate: {
         day: today.getDate(),
         month: today.getMonth() + 1,
         year: today.getFullYear(),
       },
-      estados: DATOS_PRUEBA,
-      error: false
+      estados: [],
+      error: false,
+      isLoading: true
     };
     this.pickUpDate = this.pickUpDate.bind(this);
   }
   //rutas
-  
+
   goPerfil = () => {
     this.props.navigation.navigate('Perfil');
   }
@@ -129,21 +58,22 @@ class HomeScreen extends React.Component {
   goLista = () => {
     this.props.navigation.navigate('Lista');
   }
-  goADDESTADO= () => {
-    this.props.navigation.navigate('CambiarEstado');
+  goADDESTADO = () => {
+    this.props.navigation.navigate('CambiarEstado', {id: this.state.id});
   }
-  goADDTRIUNFO= () => {
-    this.props.navigation.navigate('CambiarTriunfo');
+  goADDTRIUNFO = () => {
+    this.props.navigation.navigate('CambiarTriunfo', { id: this.state.id });
   }
+
   logout = () => {
     // log-out
-    SecureStore.deleteItemAsync('token').then(() => {this.setState({error: false})})
-    .catch((error) => {
-      console.error(error); // aqui es para poner bonito el mensaje de error en caso de que no se haya podido eliminar
-      this.setState({error: true});
-    }).finally(() => {
-      this.props.navigation.navigate('Login');
-    });
+    SecureStore.deleteItemAsync('token').then(() => { this.setState({ error: false }) })
+      .catch((error) => {
+        console.error(error); // aqui es para poner bonito el mensaje de error en caso de que no se haya podido eliminar
+        this.setState({ error: true });
+      }).finally(() => {
+        this.props.navigation.navigate('Login');
+      });
   }
   /*
     fetchJsonGetMethod() {
@@ -180,11 +110,13 @@ class HomeScreen extends React.Component {
     );
     const Estado = ListEstados.find((estado) => {
       const EstadoDate = new Date(estado.fecha);
+
       return (
         EstadoDate.getDate() == FindDate.getDate() &&
         EstadoDate.getFullYear() == FindDate.getFullYear() &&
         EstadoDate.getMonth() == FindDate.getMonth()
       );
+
     });
     let triunfos = [];
     if (Estado && isDefined(Estado.triunfos)) {
@@ -216,93 +148,102 @@ class HomeScreen extends React.Component {
   selectDateCalendar = (date) => {
     this.selectDate(date, false);
   }
-  componentDidMount() { }
+  componentDidMount() {
+    //fetch(`http://${IP_DB}:3000`);
+    this.setState({ id: this.props.route.params.id, isLoading: false });
+  }
+
   render() {
-    return (
-      <Container style={styles.Container}>
-        <LinearGradient
-          // Background Linear Gradient
-          colors={["#00B0E8", "#BB8FCE"]}
-          style={styles.background}
-        />
-        <Header
-          transparent
-          androidStatusBarColor="#00B0E8"
-          style={styles.Header}
-        >
-          <Left>
-            <Icon name="home" style={{ color: "white" }} />
-          </Left>
-          <Body>
-            <Title style={styles.Header}> HOME </Title>
-          </Body>
-          <Right
-          //Poner ruta a log-out
-          >
-          <Button iconLeft transparent onPress={this.logout.bind(this)} >
-             <Icon name="log-out" style={{ color: "white" }} />
-          </Button>
-           
-          </Right>
-        </Header>
-
-        <Content >
-          <Calendario
-            estados={this.state.estados}
-            pickUpDate={this.selectDateCalendar.bind(this)}
+    const { isLoading, id } = this.state;
+    console.log(id);
+    if (isLoading) {
+      return (<LoadingFull />);
+    }
+    else {
+      return (
+        <Container style={styles.Container}>
+          <LinearGradient
+            // Background Linear Gradient
+            colors={["#00B0E8", "#BB8FCE"]}
+            style={styles.background}
           />
-          <Button rounded
-            style={styles.Button}
-            onPress={() => {
-              this.selectDate(new Date(), true);
-            }}
+          <Header
+            transparent
+            androidStatusBarColor="#00B0E8"
+            style={styles.Header}
           >
-            <Text style={styles.Text2}>
-              Ver reporte del día
+            <Left>
+              <Icon name="home" style={{ color: "white" }} />
+            </Left>
+            <Body>
+              <Title style={styles.Header}> HOME </Title>
+            </Body>
+            <Right
+            //Poner ruta a log-out
+            >
+              <Button iconLeft transparent onPress={this.logout.bind(this)} >
+                <Icon name="log-out" style={{ color: "white" }} />
+              </Button>
+            </Right>
+          </Header>
+          <Content >
+            <Calendario
+              estados={this.state.estados}
+              pickUpDate={this.selectDateCalendar.bind(this)}
+            />
+            <Button rounded
+              style={styles.Button}
+              onPress={() => {
+                this.selectDate(new Date(), true);
+              }}
+            >
+              <Text style={styles.Text2}>
+                Ver reporte del día
             </Text>
-          </Button>
-          <Item
-            style={{
-              flex: 1,
-              flexDirection: "row",
-              justifyContent: "space-around",
-              marginTop: 10,
-              paddingBottom: 10,
-            }}
-          >
-            <Button rounded style={styles.Button}
-            onPress={this.goADDESTADO}>
-              <Text style={styles.Text2}>¿Cómo te sientes hoy?</Text>
             </Button>
-            <Button rounded style={styles.Button}
-            onPress={this.goADDTRIUNFO}>
-              <Text style={styles.Text2}>¿Qué hiciste hoy?</Text>
-            </Button>
-          </Item>
-        </Content>
-        <Footer>
-          <FooterTab>
+            <Item
+              style={{
+                flex: 1,
+                flexDirection: "row",
+                justifyContent: "space-around",
+                marginTop: 10,
+                paddingBottom: 10,
+              }}
+            >
+              <Button rounded style={styles.Button}
+                onPress={this.goADDESTADO}>
+                <Text style={styles.Text2}>¿Cómo te sientes hoy?</Text>
+              </Button>
+              <Button rounded style={styles.Button}
+                onPress={this.goADDTRIUNFO}>
+                <Text style={styles.Text2}>¿Qué hiciste hoy?</Text>
+              </Button>
+            </Item>
+          </Content>
+          <Footer>
+            <FooterTab>
+              <Button style={styles.Button}
+                onPress={this.goEstado}
+              >
+                <Icon name="heart" />
+              </Button>
+              <Button active style={styles.Button}
+                onPress={this.goPerfil}
+              >
+                <Icon name="person" />
+              </Button>
+              <Button style={styles.Button}
+                onPress={this.goLista}
+              >
+                <Icon name="flame" />
+              </Button>
+            </FooterTab>
+          </Footer>
+        </Container>
+      );
+    }
 
-            
-            <Button style={styles.Button}
-              onPress={this.goEstado}
-            >
-              <Icon name="heart" />
-            </Button>
-            <Button active style={styles.Button}
-              onPress={this.goPerfil}
-            >
-              <Icon name="person" />
-            </Button>
-            <Button style={styles.Button}
-              onPress={this.goLista}
-            >
-              <Icon name="flame" />
-            </Button>
-          </FooterTab>
-        </Footer>
-      </Container>
-    );
+
   }
 }
 export default HomeScreen;

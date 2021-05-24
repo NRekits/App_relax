@@ -26,6 +26,7 @@ export default class AddTriunfoScreen extends React.Component {
       selectedHours: 0,
       selectedMinutes: 0,
       show: false,
+      selectedDate: null
     };
   }
   goBack = () => {
@@ -33,6 +34,7 @@ export default class AddTriunfoScreen extends React.Component {
    }
   componentDidMount() {
     this.setState({ isLoading: false });
+    console.log(this.props.route.params);
   }
 
   changeHoursMinutes = (hours, minutes) => {
@@ -47,6 +49,7 @@ export default class AddTriunfoScreen extends React.Component {
     this.setState({
       selectedHours: date.getHours(),
       selectedMinutes: date.getMinutes(),
+      selectedDate: date
     });
   };
 
@@ -130,7 +133,7 @@ export default class AddTriunfoScreen extends React.Component {
               )}
             </Form>
 
-            <Button block rounded style={styles.Button}>
+            <Button block rounded style={styles.Button} onPress={() => this.props.route.params.addTriunfo(this.state.nombre, this.state.descripcion, this.state.selectedDate)}>
               <Text>{Action}</Text>
             </Button>
           </Content>

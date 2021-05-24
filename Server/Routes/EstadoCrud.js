@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const Estado =require('../models/Estado')
+const Estado = require('../models/Estado')
 
 
 
@@ -18,14 +18,11 @@ router.post('/insertar', async (req, res) => {
             console.log('dato insertado',doc)
             res.json({response:'exito'})
         })
-        .catch (err=>{
+        .catch(err => {
             console.log("error al insertar", err.message)
-        }) 
-
-    
         })
 
-
+    })
 router.get('/Estadopormes/id:/fecha:', (req, res) => {
     const id= req.params.id
     const fecha= req.params.fecha
@@ -34,4 +31,4 @@ router.get('/Estadopormes/id:/fecha:', (req, res) => {
 
 
 })
-module.exports = router;
+module.exports = router; 
