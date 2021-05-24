@@ -20,6 +20,7 @@ import IP_DB from './../ip_address';
 import { Dimensions, StyleSheet } from "react-native";
 
 import { LinearGradient } from "expo-linear-gradient";
+import { isDefined } from "../CommonFunctions";
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 
@@ -34,6 +35,34 @@ export default class AddSintomaScreen extends React.Component {
       isModification: false,
       error: false
     };
+  }
+
+  modifyEstado = () => {
+    fetch(`http://${IP_DB}:3000/Estado/ModificarEstadodeldia`,
+    {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        id: this.state.id,
+        nombre: this.state.estado,
+        descripcion: this.state.descripcion
+      })
+    })
+    .then((res) => res.json())
+    .then(() => {this.setState({error: false})})
+    .catch((error) => {
+      console.error(error);
+      this.setState({error: true});
+    }).finally(() => {
+      if(!this.state.error){
+        Toast.show({
+          text: 'Has cambiado tu estado',
+          type: 'success'
+        })
+      }
+    })
   }
 
   addEstado = () => {
@@ -77,7 +106,11 @@ export default class AddSintomaScreen extends React.Component {
     this.props.navigation.goBack();
    }
   componentDidMount() {
-    this.setState({id: this.props.route.params.id,  isLoading: false });
+    if(isDefined(this.props.route.params.isModify) && this.props.route.params.isModify){
+      this.setState({id: this.props.route.params.id, isLoading: false, isModification: this.props.route.params.isModify, estado: this.props.route.params.estado, descripcion: this.props.route.params.descripcion});
+    }else{
+      this.setState({id: this.props.route.params.id,  isLoading: false });
+    }
   }
   onValueChange(value) {
     this.setState({ selected: value });
@@ -150,11 +183,25 @@ export default class AddSintomaScreen extends React.Component {
                   this.setState({descripcion: text})
                 }}
               />
+              {this.state.isModification ?
+              (
+              <Button  block rounded style={styles.Button} onPress={() => {
+                this.modifyEstado();
+              }}>
+                <Text>{Action}</Text>
+              </Button>
+              ):
+              (
               <Button  block rounded style={styles.Button} onPress={() => {
                 this.addEstado(this.state.estado, this.state.descripcion, new Date());
               }}>
                 <Text>{Action}</Text>
               </Button>
+              )
+
+              }
+
+
             </Form>
           </Content>
         </Container>

@@ -29,9 +29,11 @@ export default class EstadoScreen extends React.Component {
       descripcion:
         "Lorem impsum Lorem impsum Lorem impsum Lorem impsum Lorem impsum Lorem impsum Lorem impsum Lorem impsum Lorem impsum Lorem impsum ",
       fecha: "",
+      id: '',
       isLoading: true,
     };
   }
+
   changeState() {
     const today = this.todayDate();
     const { fecha } = this.state;
@@ -45,11 +47,16 @@ export default class EstadoScreen extends React.Component {
     }
   }
   
+  goToModifyEstado = () => {
+    let today = new Date();
+    today.setHours(today.getHours()-5);
+    this.props.navigation.navigate('CambiarEstado', {id: this.state.id, descripcion: this.state.descripcion, estado: this.state.estado, isModify: true})
+  }
   goBack = () => {
     this.props.navigation.goBack();
   }
   componentDidMount() {
-    this.setState({ fecha: this.props.fecha, isLoading: false });
+    this.setState({id: this.props.route.params.id, estado:this.props.route.params.estado, descripcion: this.props.route.params.descripcion, fecha: this.props.fecha, isLoading: false });
   }
   render() {
     const { estado, descripcion, isLoading } = this.state;
@@ -90,7 +97,7 @@ export default class EstadoScreen extends React.Component {
                 header
                 onPress={this.changeState}
               >
-                <Text style={styles.H2}>{estado}</Text>
+                <Text onPress={() => {this.goToModifyEstado()}} style={styles.H2}>{estado}</Text>
               </CardItem>
               <CardItem style={styles.Card} cardBody>
                 <Text style={styles.Text}>{descripcion}</Text>

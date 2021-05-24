@@ -32,21 +32,27 @@ export default class ReporteScreen extends React.Component {
     super(props);
     this.state = {
       estado: "",
+      id: '',
       triunfos: [],
       isLoading: true,
+      fecha: '',
+      id_estado: ''
     };
   }
 
   goBack = () => {
     this.props.navigation.goBack();
-   }
+  }
+
   componentDidMount() {
     this.setState({
+      id: this.props.route.params.id,
       estado: this.props.route.params.estado,
       triunfos: [...this.props.route.params.triunfos],
       isLoading: false,
     });
   }
+
 
   Item = (props) => {
     return (
@@ -71,6 +77,7 @@ export default class ReporteScreen extends React.Component {
         </Container>
       );
     } else {
+      console.log(this.state);
       const { triunfos, estado } = this.state;
       return (
         <Container style={styles.Container}>

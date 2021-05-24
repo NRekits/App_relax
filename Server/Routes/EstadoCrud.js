@@ -58,6 +58,10 @@ router.get('/Estadopordia/:iduser/:fecha', (req, res) => {
 
 //Modificar estado del dia
 router.post('/ModificarEstadodeldia', (req, res) => {
+    const id = req.body.id;
+    console.log(id);
+    console.log(req.body.nombre);
+    console.log(req.body.descripcion);
     
     Estado.findByIdAndUpdate({_id:id} ,{$set : { 
         nombre: req.body.nombre,
