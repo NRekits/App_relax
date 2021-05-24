@@ -46,6 +46,35 @@ class HomeScreen extends React.Component {
   }
   //rutas
 
+  getEstados = () =>{
+    const today = new Date();
+    const Year = today.getFullYear();
+    let Month =  today.getMonth()+1;
+    let Day = today.getDate();
+    if(Day < 10){
+      Day = `0${Day}`;
+    }
+    if(Month < 10){
+      Month = `0${Month}`;
+    }
+
+    fetch(`http://${IP_DB}:3000/Estado/Estadopormes/${this.state.id}/${Year}-${Month}-${Day}`)
+    .then((res) => res.json())
+    .then((data) => {
+
+      this.setState({error: false});
+    })
+    .catch((error) => {
+      console.error(error);
+      this.setState({error: true})
+    })
+    .finally(() => {
+      if(!this.state.error){
+        this.setState({isLoading: false});
+      }
+    });
+  }
+
   goPerfil = () => {
     this.props.navigation.navigate('Perfil');
   }
@@ -149,13 +178,12 @@ class HomeScreen extends React.Component {
     this.selectDate(date, false);
   }
   componentDidMount() {
-    //fetch(`http://${IP_DB}:3000`);
-    this.setState({ id: this.props.route.params.id, isLoading: false });
+    this.setState({ id: this.props.route.params.id, isLoading: false});
+    // this.getEstados();
   }
 
   render() {
     const { isLoading, id } = this.state;
-    console.log(id);
     if (isLoading) {
       return (<LoadingFull />);
     }
