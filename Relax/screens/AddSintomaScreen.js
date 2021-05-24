@@ -14,7 +14,7 @@ import {
 } from "native-base";
 import { View, Picker } from "react-native";
 import { LoadingFull } from "./../Components/Loading";
-import {IP_DB} from './../ip_address';
+import IP_DB from './../ip_address';
 
 import { Dimensions, StyleSheet } from "react-native";
 
@@ -53,19 +53,13 @@ export default class AddSintomaScreen extends React.Component {
     .then((res) => res.json())
     .then((res) => {
       this.setState({error: false});
-      console.log(res);
     })
     .catch((error) => {
       console.error(error);
       this.setState({error: true})
     })
     .finally(() => {
-        console.log({
-        idUser: this.state.id,
-        nombre: this.state.estado,
-        descripcion: this.state.descripcion,
-        fecha: today.toISOString()
-      });
+
       if(!this.state.error){
         this.props.navigation.navigate('Home', {id: this.state.id});
       }

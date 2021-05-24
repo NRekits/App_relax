@@ -46,6 +46,9 @@ class HomeScreen extends React.Component {
   }
   //rutas
 
+  getEstados = () =>{
+    fetch(`http://${IP_DB}:3000/Estado/Estadopormes/`)
+  }
   goPerfil = () => {
     this.props.navigation.navigate('Perfil');
   }

@@ -21,12 +21,26 @@ router.post('/insertar', async (req, res) => {
         .catch(err => {
             console.log("error al insertar", err.message)
         })
+<<<<<<< Updated upstream
 
     })
 router.get('/Estadopormes/id:/fecha:', (req, res) => {
     const id= req.params.id
     const fecha= req.params.fecha
   
+=======
+})
+
+router.get('/Estadopormes/id:/mes:', (req, res) => {
+    const id = req.params.id
+    const mes = req.params.mes
+    try {
+
+
+    } catch (e) {
+        return status(400).json({ error: "Hubo un error en el login, por favor intenta de nuevo" })
+    }
+>>>>>>> Stashed changes
 
 
 
