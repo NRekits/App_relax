@@ -33,6 +33,7 @@ class HomeScreen extends React.Component {
     let today = new Date();
     this.state = {
       id: "",
+      correo: '',
       estados: [],
       error: false,
       isLoading: true
@@ -52,8 +53,7 @@ class HomeScreen extends React.Component {
     fetch(`http://${IP_DB}:3000/Estado/Estadospormes/${this.props.route.params.id}/${Year}-${Month}-01`)
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
-        this.setState({ error: false, isLoading: false, estados: [...data.data] });
+        console.log(data); this.setState({ error: false, isLoading: false, estados: [...data.data] });
       })
 
       .catch((error) => {
@@ -68,7 +68,7 @@ class HomeScreen extends React.Component {
   }
 
   goPerfil = () => {
-    this.props.navigation.navigate('Perfil');
+    this.props.navigation.navigate('Perfil', {idUsuario: this.state.id});
   }
   goLista = () => {
     this.props.navigation.navigate('Lista');
