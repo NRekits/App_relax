@@ -11,6 +11,7 @@ import {
   Icon,
   Title,
   Textarea,
+  Toast
 } from "native-base";
 import { View, Picker } from "react-native";
 import { LoadingFull } from "./../Components/Loading";
@@ -37,6 +38,7 @@ export default class AddSintomaScreen extends React.Component {
 
   addEstado = () => {
     const today= new Date();
+    today.setHours(today.getHours() - 5);
     fetch(`http://${IP_DB}:3000/Estado/insertar`,
     {
       method: 'POST',
@@ -61,6 +63,11 @@ export default class AddSintomaScreen extends React.Component {
     .finally(() => {
 
       if(!this.state.error){
+        Toast.show({
+          text: 'Se ha añadido ',
+          buttonText: 'Entendido',
+          type: 'success'
+        })
         this.props.navigation.navigate('Home', {id: this.state.id});
       }
     });

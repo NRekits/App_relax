@@ -2,7 +2,7 @@ const router = require('express').Router();
 const Estado = require('../models/Estado')
 
 
-
+//Insertar
 router.post('/insertar', async (req, res) => {
 
     const estado = new Estado({
@@ -22,12 +22,15 @@ router.post('/insertar', async (req, res) => {
             console.log("error al insertar", err.message)
         })
 
-    })
+    });
+
+//Mostrar todos los estados de un usuario después de una fecha especifica
+//Para mostrar en el calendario
 router.get('/Estadospormes/:id/:fecha', (req, res) => {
     const id= req.params.id
     const fecha= req.params.fecha
     
-    Estado.find({_id:id,fecha : {"$gt" : fecha}})
+    Estado.find({iduser:id,fecha : {"$gte" : fecha}})
     .then(doc=>{
         res.json({data:doc});
     })
@@ -35,5 +38,38 @@ router.get('/Estadospormes/:id/:fecha', (req, res) => {
         console.log("error", err.message)
     })
 
-})
+});
+//Estado del usuario por día
+router.get('/Estadopordia/:iduser/:fecha', (req, res) => {
+ 
+    const fecha= req.params.fecha
+    const iduser=req.params.iduser
+    
+    Estado.find({iduser:iduser,fecha:fecha})
+    .then(doc=>{
+        res.json({data:doc});
+    })
+    .catch(err=>{
+        console.log("error", err.message)
+    })
+
+});
+
+//Modificar estado del dia
+router.post('/ModificarEstadodeldia', (req, res) => {
+    
+    Estado.findByIdAndUpdate({_id:id} ,{$set : { 
+        nombre: req.body.nombre,
+        descripcion: req.body.descripcion}})
+    .then(doc=>{
+        res.json({data:doc});
+    })
+    .catch(err=>{
+        console.log("error", err.message)
+    })
+
+});
+
+
+
 module.exports = router;
