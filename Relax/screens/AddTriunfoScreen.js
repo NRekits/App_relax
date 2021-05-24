@@ -10,40 +10,60 @@ import {
     Textarea,
     Label,
 } from 'native-base';
-import RNDateTimePicker from '@react-native-community/datetimepicker';
-import { set } from 'react-native-reanimated';
 import {LoadingFull} from './../Components/Loading';
 import {LinearGradient} from 'expo-linear-gradient';
+import IP_DB from './../ip_address';
 
 export default class AddTriunfoScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      idUsuario: '',
       nombre: "",
       descripcion: "",
       isLoading: true,
       isModification: false,
-      selectedHours: 0,
-      selectedMinutes: 0,
-      show: false,
-      selectedDate: null
+      error: false
     };
   }
   goBack = () => {
     this.props.navigation.goBack();
    }
   componentDidMount() {
-    this.setState({ isLoading: false });
-    console.log(this.props.route.params);
+    this.setState({ idUsuario: this.props.route.params.idUsuario, isLoading: false });
   }
 
   changeHoursMinutes = (hours, minutes) => {
     this.setState({ selectedMinutes: minutes, selectedHours: hours });
   };
 
-  showTimePicker = () => {
-    this.setState({ show: true });
-  };
+  addTriunfo = () => {
+    let today = new Date();
+    today.setHours(today.getHours() - 5);
+    fetch(`http://${IP_DB}:3000/Triunfo/insertar`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        iduser: this.state.idUsuario,
+        nombre: this.state.nombre,
+        descripcion: this.state.descripcion,
+        fecha: today.toISOString()
+      })
+    })
+    .then((res) => res.json())
+    .then(() => {this.setState({error: false})})
+    .catch((error) => {
+      console.error(error);
+      this.setState({error: true});
+    })
+    .finally(() => {
+      if(!this.state.error){
+        this.props.navigation.navigate('Home');
+      }
+    });
+  }
 
   onChangeTime = (event, date) => {
     this.setState({
@@ -59,8 +79,6 @@ export default class AddTriunfoScreen extends React.Component {
       descripcion,
       isLoading,
       isModification,
-      selectedHours,
-      selectedMinutes,
     } = this.state;
     let Action = "Añadir";
     if (isModification) {
@@ -71,6 +89,7 @@ export default class AddTriunfoScreen extends React.Component {
           <LoadingFull />
       );
     } else {
+    console.log(this.state);
       return (
         <Container>
               <LinearGradient
@@ -119,7 +138,7 @@ export default class AddTriunfoScreen extends React.Component {
              
             </Form>
 
-            <Button block rounded style={styles.Button} onPress={() => this.props.route.params.addTriunfo(this.state.nombre, this.state.descripcion, this.state.selectedDate)}>
+            <Button block rounded style={styles.Button} onPress={() => {this.addTriunfo()}}>
               <Text>{Action}</Text>
             </Button>
           </Content>

@@ -53,7 +53,6 @@ export default class ReporteScreen extends React.Component {
     });
   }
 
-
   Item = (props) => {
     return (
       <ListItem style={{ borderBottomWidth: 1 }}>

@@ -116,7 +116,7 @@ class HomeScreen extends React.Component {
     }
   }
   goADDTRIUNFO = () => {
-    this.props.navigation.navigate('CambiarTriunfo', { id: this.state.id });
+    this.props.navigation.navigate('CambiarTriunfo', { idUsuario: this.state.id });
   }
 
   logout = () => {

@@ -8,8 +8,6 @@ import {
     Card, CardItem,
     Text
 } from 'native-base';
-import { ESTADOS_COLOR} from './../CommonFunctions';
-import {LoadingFull} from './../Components/Loading';
 
 import { LinearGradient } from "expo-linear-gradient";
 export default class EstadoScreen extends React.Component {
@@ -28,8 +26,8 @@ export default class EstadoScreen extends React.Component {
       estado: "Estresado",
       descripcion:
         "Lorem impsum Lorem impsum Lorem impsum Lorem impsum Lorem impsum Lorem impsum Lorem impsum Lorem impsum Lorem impsum Lorem impsum ",
-      fecha: "",
       id: '',
+      modify: false,
       isLoading: true,
     };
   }
@@ -52,11 +50,12 @@ export default class EstadoScreen extends React.Component {
     today.setHours(today.getHours()-5);
     this.props.navigation.navigate('CambiarEstado', {id: this.state.id, descripcion: this.state.descripcion, estado: this.state.estado, isModify: true})
   }
+
   goBack = () => {
     this.props.navigation.goBack();
   }
   componentDidMount() {
-    this.setState({id: this.props.route.params.id, estado:this.props.route.params.estado, descripcion: this.props.route.params.descripcion, fecha: this.props.fecha, isLoading: false });
+    this.setState({id: this.props.route.params.id, isLoading: false });
   }
   render() {
     const { estado, descripcion, isLoading } = this.state;
