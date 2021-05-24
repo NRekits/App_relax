@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Dimensions, Alert, Image, StyleSheet } from "react-native";
+import { Dimensions, Alert, Image, StyleSheet, ToolbarAndroidComponent } from "react-native";
 import {
   Container,
   Header,
@@ -33,44 +33,38 @@ class HomeScreen extends React.Component {
     let today = new Date();
     this.state = {
       id: "",
-      selectedDate: {
-        day: today.getDate(),
-        month: today.getMonth() + 1,
-        year: today.getFullYear(),
-      },
       estados: [],
       error: false,
       isLoading: true
     };
-    this.pickUpDate = this.pickUpDate.bind(this);
   }
   //rutas
 
-  getEstados = () =>{
+  getEstados = () => {
     console.log(this.state.id);
     const today = new Date();
     const Year = today.getFullYear();
-    let Month =  today.getMonth()+1;
-    if(Month < 10){
+    let Month = today.getMonth() + 1;
+    if (Month < 10) {
       Month = `0${Month}`;
     }
 
     fetch(`http://${IP_DB}:3000/Estado/Estadospormes/${this.props.route.params.id}/${Year}-${Month}-01`)
-    .then((res) => res.json())
-    .then((data) => {
-      console.log(data);
-      this.setState({error: false, isLoading: false, estados: [...data.data]});
-    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        this.setState({ error: false, isLoading: false, estados: [...data.data] });
+      })
 
-    .catch((error) => {
-      console.error(error);
-      this.setState({error: true})
-    })
-    .finally(() => {
-      if(!this.state.error){
-        this.setState({isLoading: false});
-      }
-    });
+      .catch((error) => {
+        console.error(error);
+        this.setState({ error: true })
+      })
+      .finally(() => {
+        if (!this.state.error) {
+          this.setState({ isLoading: false });
+        }
+      });
   }
 
   goPerfil = () => {
@@ -80,13 +74,46 @@ class HomeScreen extends React.Component {
     this.props.navigation.navigate('Lista');
   }
   goEstado = () => {
-    this.props.navigation.navigate('Estado');
+    let estados = [...this.state.estados];
+    let find = new Date();
+    find.setHours(find.getHours() - 5);
+    let estado = estados.find((item) => {
+      const EstadoDate = new Date(item.fecha);
+      return (
+        (find.getFullYear() == EstadoDate.getFullYear() &&
+          find.getMonth() == EstadoDate.getMonth() &&
+          find.getDate() == EstadoDate.getDate())
+      );
+    });
+
+    if(estado && isDefined(estado.fecha)){
+      this.props.navigation.navigate('Estado', {estado: estado.nombre, id: estado._id, descripcion: estado.descripcion});
+    }else{
+      this.props.navigation.navigate('CambiarEstado', {id: this.state.id});
+    }
   }
   goLista = () => {
     this.props.navigation.navigate('Lista');
   }
   goADDESTADO = () => {
-    this.props.navigation.navigate('CambiarEstado', {id: this.state.id});
+
+    let estados = [...this.state.estados];
+    let find = new Date();
+    find.setHours(find.getHours() - 5);
+    let estado = estados.find((item) => {
+      const EstadoDate = new Date(item.fecha);
+      return (
+        (find.getFullYear() == EstadoDate.getFullYear() &&
+          find.getMonth() == EstadoDate.getMonth() &&
+          find.getDate() == EstadoDate.getDate())
+      );
+    });
+
+    if (estado && isDefined(estado.fecha)) {
+      this.selectDate({ year: find.getFullYear(), month: find.getMonth() + 1, day: find.getDate() }, true);
+    } else {
+      this.props.navigation.navigate('CambiarEstado', { id: this.state.id });
+    }
   }
   goADDTRIUNFO = () => {
     this.props.navigation.navigate('CambiarTriunfo', { id: this.state.id });
@@ -120,21 +147,11 @@ class HomeScreen extends React.Component {
       .finally(() => console.log(this.state.email, this.state.password));
     }
   */
-
-  pickUpDate(date) {
-    this.setState({
-      selectedDate: { day: date.day, month: date.month, year: date.year },
-    });
-  }
-
   selectDate(date, today) {
 
     let ListEstados = [...this.state.estados];
-    const FindDate = new Date(
-      date.year,
-      date.month - 1,
-      date.day - 1
-    );
+    const FindDate = new Date(date.year, date.month - 1, date.day);
+    console.log(FindDate.toISOString());
     const Estado = ListEstados.find((estado) => {
       const EstadoDate = new Date(estado.fecha);
 
@@ -154,7 +171,11 @@ class HomeScreen extends React.Component {
       (isDefined(Estado.nombre) || isDefined(Estado.triunfos))
     ) {
       this.props.navigation.navigate("Reporte", {
+        id: this.state.id,
+        id_estado: Estado._id,
         estado: Estado.nombre,
+        descripcion: Estado.descripcion,
+        fecha: Estado.fecha,
         triunfos: [...triunfos],
       });
     } else {
@@ -176,7 +197,7 @@ class HomeScreen extends React.Component {
     this.selectDate(date, false);
   }
   componentDidMount() {
-    this.setState({ id: this.props.route.params.id});
+    this.setState({ id: this.props.route.params.id });
     this.getEstados();
   }
 
@@ -220,7 +241,9 @@ class HomeScreen extends React.Component {
             <Button rounded
               style={styles.Button}
               onPress={() => {
-                this.selectDate(new Date(), true);
+                let today = new Date();
+                today.setHours(today.getHours() - 5);
+                this.selectDate({ year: today.getFullYear(), month: today.getMonth() + 1, day: today.getDate() }, true);
               }}
             >
               <Text style={styles.Text2}>

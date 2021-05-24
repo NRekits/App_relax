@@ -11,11 +11,6 @@ LocaleConfig.defaultLocale = 'mx';
 import {Container}  from 'native-base';
 import {isDefined, ESTADOS_COLOR} from './../CommonFunctions';
 
-
-const TRIUNFOS_COLOR = {
-    "Meditación sin pausa": "#7c7b89",
-    "Completaste 5 meditaciones": "#4e4423"
-};
 export default class Calendario extends React.Component {
     constructor(props){
         super(props);
@@ -23,6 +18,7 @@ export default class Calendario extends React.Component {
             estados: {}
         };
     }
+
     componentDidMount(){
         let copy = {}
         this.props.estados.forEach((item, index) => {
