@@ -26,17 +26,35 @@ router.post('/insertar', (req, res) => {
         })
 
 
-router.get('/Estadopormes/id:/mes:', (req, res) => {
-    const id= req.params.id
-    const mes= req.params.mes
-    try {
-       
 
-    }catch(e){
-        return status(400).json({error: "Hubo un error en el login, por favor intenta de nuevo"})
-    }
+//Triunfos del usuario por día
+router.get('/Triunfospordia/:iduser/:fecha', (req, res) => {
+ 
+    const fecha= req.params.fecha
+    const iduser=req.params.iduser
+    
+    Estado.find({iduser:iduser,fecha:fecha})
+    .then(doc=>{
+        res.json({data:doc});
+    })
+    .catch(err=>{
+        console.log("error", err.message)
+    })
 
+});
 
+//Modificar triunfo del dia
+router.post('/ModificarTriunfodeldia', (req, res) => {
+    
+    Estado.findByIdAndUpdate({_id:id} ,{$set : { 
+        nombre: req.body.nombre,
+        descripcion: req.body.descripcion}})
+    .then(doc=>{
+        res.json({data:doc});
+    })
+    .catch(err=>{
+        console.log("error", err.message)
+    })
 
-})
+});
 module.exports = router;
