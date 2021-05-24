@@ -27,7 +27,19 @@ export default class Calendario extends React.Component {
         let copy = {}
         this.props.estados.forEach((item, index) => {
             Object.assign(this.state.estados, copy);
-            copy[`${item.fecha}`] = {selected: true, selectedColor: ESTADOS_COLOR[item.nombre]};
+            let fecha = new Date(item.fecha);
+            let Year = fecha.getFullYear();
+            let Month = fecha.getMonth() + 1;
+            let Day = fecha.getDate();
+
+            if(Day < 10){
+                Day = `0${Day}`;
+            }
+            if(Month < 10){
+                Month = `0${Month}`;
+            }
+
+            copy[`${Year}-${Month}-${Day}`] = {selected: true, selectedColor: ESTADOS_COLOR[item.nombre]};
             this.setState({estados: copy});
         });
     }

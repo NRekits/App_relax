@@ -47,23 +47,21 @@ class HomeScreen extends React.Component {
   //rutas
 
   getEstados = () =>{
+    console.log(this.state.id);
     const today = new Date();
     const Year = today.getFullYear();
     let Month =  today.getMonth()+1;
-    let Day = today.getDate();
-    if(Day < 10){
-      Day = `0${Day}`;
-    }
     if(Month < 10){
       Month = `0${Month}`;
     }
 
-    fetch(`http://${IP_DB}:3000/Estado/Estadopormes/${this.state.id}/${Year}-${Month}-${Day}`)
+    fetch(`http://${IP_DB}:3000/Estado/Estadospormes/${this.props.route.params.id}/${Year}-${Month}-01`)
     .then((res) => res.json())
     .then((data) => {
-
-      this.setState({error: false});
+      console.log(data);
+      this.setState({error: false, isLoading: false, estados: [...data.data]});
     })
+
     .catch((error) => {
       console.error(error);
       this.setState({error: true})
@@ -178,8 +176,8 @@ class HomeScreen extends React.Component {
     this.selectDate(date, false);
   }
   componentDidMount() {
-    this.setState({ id: this.props.route.params.id, isLoading: false});
-    // this.getEstados();
+    this.setState({ id: this.props.route.params.id});
+    this.getEstados();
   }
 
   render() {
