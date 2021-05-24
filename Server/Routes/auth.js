@@ -84,4 +84,16 @@ router.post('/login', async (req, res) => {
 
 
 })
+router.get("/user/:id", (req, res) => {
+    const id = req.params.id;
+    console.log(id);
+  
+    User.find({ _id: id })
+      .then((doc) => {
+        res.json({ data: doc });
+      })
+      .catch((err) => {
+        console.log("error", err.message);
+      });
+  });
 module.exports = router;
