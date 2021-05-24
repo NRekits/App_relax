@@ -34,6 +34,30 @@ const LISTA_MEDITACIONES = [
         Para llevarlo a cabo, es necesario centrar la atención en la respiración. Se debe realizar una inspiración suave, profunda y constante por la nariz. Al llenarnos de aire, soltar enseguida el aire por la boca con intensidad pero sin forzar la garganta. Al notar una distracción (que es normal), observamos qué es aquello que captó nuestra atención y regresamos de nuevo a la respiración.",
     url: "https://vivirmindfulness.com/wp-content/uploads/2020/04/VivirMindfulness-Atenci%C3%B3n_a_la_respiraci%C3%B3n.mp3",
   },
+  {
+    id: 3,
+    nombre: "Escaneo del cuerpo",
+    descripcion:
+      "Esta meditación está diseñada para familiarizarnos con las sensaciones más sutiles de nuestro cuerpo y darnos cuenta de la forma en que cambian continuamente, para así aprender a prestar más atención a cómo nos sentimos en el momento presente",
+    url: "https://kensho.life/meditaciones-guiadas/escaneo-del-cuerpo-10-minutos",
+    
+  },
+  {
+    id: 4,
+    nombre: "Reconocer el estrés",
+    descripcion:
+      "En esta meditación practicamos localizar y abrirnos a las sensaciones físicas que se crean cuando algo nos estresa. Esta apertura y aceptación nos ayuda a que nos sintamos menos atrapados por el estrés.",
+    url: "https://kensho.life/meditaciones-guiadas/reconocer-el-estres-12-minutos",
+    
+  },
+  {
+    id: 5,
+    nombre: "Meditación de S.O.S",
+    descripcion:
+      "En esta meditación practicamos hacer una breve pausa cuando nos sentimos estresados para evitar dejarnos arrastrar por la reactividad o entrar en una espiral de pensamientos negativos.",
+    url: "https://kensho.life/meditaciones-guiadas/meditacion-sos-5-minutos",
+    
+  },
 ];
 
 export default class ListaMeditacionesScreen extends React.Component {
