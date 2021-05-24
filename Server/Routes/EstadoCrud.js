@@ -51,8 +51,15 @@ router.get("/Estado/:id", (req, res) => {
 router.get("/Estadopordia/:iduser/:fecha", (req, res) => {
   const fecha = req.params.fecha;
   const iduser = req.params.iduser;
+  const li = new Date(fecha);
+  const ls = new Date(fecha);
+  console.log(iduser);
+  ls.setHours(ls.getHours()+24);
 
-  Estado.find({ iduser: iduser, fecha: fecha })
+  console.log(li);
+  console.log(ls);
+
+  Estado.find({ iduser: iduser, fecha: {$gte: li, $lt: ls}})
     .then((doc) => {
       res.json({ data: doc });
     })

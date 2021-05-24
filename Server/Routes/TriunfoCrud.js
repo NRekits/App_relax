@@ -32,8 +32,11 @@ router.get('/Triunfospordia/:iduser/:fecha', (req, res) => {
  
     const fecha= req.params.fecha
     const iduser=req.params.iduser
+    const li = new Date(fecha);
+    const ls = new Date(fecha);
+    ls.setHours(ls.getHours()+24);
     
-    Triunfo.find({iduser:iduser,fecha:fecha})
+    Triunfo.find({iduser:iduser,fecha: {$gte: li, $lt: ls}})
     .then(doc=>{
         res.json({data:doc});
     })

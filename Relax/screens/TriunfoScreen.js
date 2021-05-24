@@ -26,6 +26,7 @@ export default class TriunfoScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      id: '',
       nombre: "Hoy logre aguantarme",
       descripcion:
         "Lorem impsum Lorem impsum Lorem impsum Lorem impsum Lorem impsum Lorem impsum Lorem impsum Lorem impsum Lorem impsum Lorem impsum ",
@@ -49,8 +50,12 @@ export default class TriunfoScreen extends React.Component {
     this.props.navigation.goBack();
   };
 
+  getData = () => {
+
+  }
+
   componentDidMount() {
-    this.setState({ fecha: this.props.fecha, isLoading: false });
+    this.setState({ fecha: this.props.fecha, id: this.props.route.params.id});
   }
   render() {
     const { nombre, descripcion, isLoading } = this.state;
@@ -97,11 +102,7 @@ export default class TriunfoScreen extends React.Component {
                 <Text style={styles.Text}>Hora: </Text>
               </CardItem>
               <CardItem footer>
-                <Body style={{ alignItems: "center" }}>
-                  <Button block rounded  style={styles.Button}>
-                    <Text style={styles.Text2}>Modificar</Text>
-                  </Button>
-                </Body>
+
               </CardItem>
             </Card>
           </Content>

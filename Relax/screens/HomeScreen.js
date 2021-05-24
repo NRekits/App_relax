@@ -68,7 +68,7 @@ class HomeScreen extends React.Component {
   }
 
   goPerfil = () => {
-    this.props.navigation.navigate('Perfil', {idUsuario: this.state.id});
+    this.props.navigation.navigate('Perfil', { idUsuario: this.state.id });
   }
   goLista = () => {
     this.props.navigation.navigate('Lista');
@@ -86,10 +86,10 @@ class HomeScreen extends React.Component {
       );
     });
 
-    if(estado && isDefined(estado.fecha)){
-      this.props.navigation.navigate('Estado', {estado: estado.nombre, id: estado._id, descripcion: estado.descripcion});
-    }else{
-      this.props.navigation.navigate('CambiarEstado', {id: this.state.id});
+    if (estado && isDefined(estado.fecha)) {
+      this.props.navigation.navigate('Estado', { id: estado._id });
+    } else {
+      this.props.navigation.navigate('CambiarEstado', { id: this.state.id });
     }
   }
   goLista = () => {
@@ -149,49 +149,12 @@ class HomeScreen extends React.Component {
   */
   selectDate(date, today) {
 
-    let ListEstados = [...this.state.estados];
     const FindDate = new Date(date.year, date.month - 1, date.day);
-    console.log(FindDate.toISOString());
-    const Estado = ListEstados.find((estado) => {
-      const EstadoDate = new Date(estado.fecha);
-
-      return (
-        EstadoDate.getDate() == FindDate.getDate() &&
-        EstadoDate.getFullYear() == FindDate.getFullYear() &&
-        EstadoDate.getMonth() == FindDate.getMonth()
-      );
-
+    this.props.navigation.navigate("Reporte", {
+      idUsuario: this.state.id,
+      fecha: FindDate.toISOString()
     });
-    let triunfos = [];
-    if (Estado && isDefined(Estado.triunfos)) {
-      triunfos = [...Estado.triunfos];
-    }
-    if (
-      Estado &&
-      (isDefined(Estado.nombre) || isDefined(Estado.triunfos))
-    ) {
-      this.props.navigation.navigate("Reporte", {
-        id: this.state.id,
-        id_estado: Estado._id,
-        estado: Estado.nombre,
-        descripcion: Estado.descripcion,
-        fecha: Estado.fecha,
-        triunfos: [...triunfos],
-      });
-    } else {
-      if (today) {
-        Toast.show({
-          text: "No ha agredado un estado para el día de hoy",
-          buttonText: "Entendido",
-        });
-      }
-      else {
-        Toast.show({
-          text: "Seleccione un día valido para mirar el reporte",
-          buttonText: "Entendido",
-        });
-      }
-    }
+
   }
   selectDateCalendar = (date) => {
     this.selectDate(date, false);

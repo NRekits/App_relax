@@ -10,6 +10,7 @@ import {
 } from 'native-base';
 
 import { LinearGradient } from "expo-linear-gradient";
+import IP_BD from './../ip_address';
 export default class EstadoScreen extends React.Component {
   todayDate = () => {
     const fecha = new Date();
@@ -30,6 +31,18 @@ export default class EstadoScreen extends React.Component {
       modify: false,
       isLoading: true,
     };
+  }
+
+  getEstado = () => {
+    const {id} = this.props.route.params;
+    fetch(`http://${IP_BD}:3000/Estado/Estado/${id}`)
+    .then((res) => res.json())
+    .then((res) => res.data[0])
+    .then((data) => {
+      this.setState({estado: data.nombre, descripcion: data.descripcion});
+    }).finally(() => {
+      this.setState({isLoading: false});
+    })
   }
 
   changeState() {
@@ -55,7 +68,8 @@ export default class EstadoScreen extends React.Component {
     this.props.navigation.goBack();
   }
   componentDidMount() {
-    this.setState({id: this.props.route.params.id, isLoading: false });
+    this.setState({id: this.props.route.params.id});
+    this.getEstado();
   }
   render() {
     const { estado, descripcion, isLoading } = this.state;
@@ -82,7 +96,6 @@ export default class EstadoScreen extends React.Component {
               <Icon
                 name="arrow-back"
                 style={{ color: "white", fontSize:30 }}
-                onPress={this.goBack}
               /></Button>{" "}{" "}
                 Estado
               </Title>
