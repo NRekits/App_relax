@@ -29,6 +29,7 @@ export default class AddSintomaScreen extends React.Component {
     super(props);
     this.state = {
       id: '',
+      estado_id: '',
       estado: "Ansios@",
       descripcion: "",
       isLoading: true,
@@ -45,7 +46,7 @@ export default class AddSintomaScreen extends React.Component {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        id: this.state.id,
+        id: this.state.estado_id,
         nombre: this.state.estado,
         descripcion: this.state.descripcion
       })
@@ -61,6 +62,7 @@ export default class AddSintomaScreen extends React.Component {
           text: 'Has cambiado tu estado',
           type: 'success'
         })
+        this.props.navigation.navigate('Home');
       }
     })
   }
@@ -107,7 +109,7 @@ export default class AddSintomaScreen extends React.Component {
    }
   componentDidMount() {
     if(isDefined(this.props.route.params.isModify) && this.props.route.params.isModify){
-      this.setState({id: this.props.route.params.id, isLoading: false, isModification: this.props.route.params.isModify, estado: this.props.route.params.estado, descripcion: this.props.route.params.descripcion});
+      this.setState({estado_id: this.props.route.params.id, isLoading: false, isModification: this.props.route.params.isModify, estado: this.props.route.params.estado, descripcion: this.props.route.params.descripcion});
     }else{
       this.setState({id: this.props.route.params.id,  isLoading: false });
     }
