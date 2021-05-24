@@ -116,21 +116,7 @@ export default class AddTriunfoScreen extends React.Component {
                 style={styles.Textarea}
                 placeholder="Describe tu triunfo..."
               />
-              <Button rounded style={styles.Button}onPress={this.showTimePicker}>
-                <Text>
-                  Elegir Hora ({selectedHours}:{selectedMinutes})
-                </Text>
-              </Button>
-              {this.state.show && (
-                <RNDateTimePicker
-                  onChange={this.onChangeTime}
-                  locale="es-MX"
-                  is24Hour={true}
-                  value={new Date()}
-                  mode="time"
-                  componentRef={(instance) => (this.datePicker = instance)}
-                />
-              )}
+             
             </Form>
 
             <Button block rounded style={styles.Button} onPress={() => this.props.route.params.addTriunfo(this.state.nombre, this.state.descripcion, this.state.selectedDate)}>
