@@ -33,12 +33,12 @@ router.get("/Estadospormes/:id/:fecha", (req, res) => {
       console.log("error", err.message);
     });
 });
+
 //Mostrar todos los estados de un usuario después de una fecha especifica
 //Para mostrar en el calendario
 router.get("/Estado/:id", (req, res) => {
   const id = req.params.id;
   console.log(id);
-
   Estado.find({ _id: id })
     .then((doc) => {
       res.json({ data: doc });
@@ -47,6 +47,7 @@ router.get("/Estado/:id", (req, res) => {
       console.log("error", err.message);
     });
 });
+
 //Estado del usuario por día
 router.get("/Estadopordia/:iduser/:fecha", (req, res) => {
   const fecha = req.params.fecha;

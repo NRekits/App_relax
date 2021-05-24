@@ -10,6 +10,7 @@ import {
 } from 'native-base';
 import {LoadingFull} from './../Components/Loading';
 import { LinearGradient } from "expo-linear-gradient";
+import IP_BD from './../ip_address';
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 
@@ -49,21 +50,27 @@ export default class TriunfoScreen extends React.Component {
   goBack = () => {
     this.props.navigation.goBack();
   };
-
   getData = () => {
-
+    const {id} = this.props.route.params;
+    fetch(`http://${IP_BD}:3000/Triunfo/Triunfo/${id}`)
+    .then((res) => res.json())
+    .then((res) => res.data[0])
+    .then((data) => {
+      this.setState({descripcion: data.descripcion, nombre: data.nombre, fecha: data.fecha})
+    }).finally(() => {
+      this.setState({isLoading: false});
+    })
   }
 
   componentDidMount() {
     this.setState({ fecha: this.props.fecha, id: this.props.route.params.id});
+    this.getData();
   }
   render() {
     const { nombre, descripcion, isLoading } = this.state;
     if (isLoading) {
       return (
-        <Container>
-          <Text>Is Loading</Text>
-        </Container>
+        <LoadingFull />
       );
     } else {
       return (
@@ -97,9 +104,6 @@ export default class TriunfoScreen extends React.Component {
               </CardItem>
               <CardItem style={styles.Card} cardBody>
                 <Text style={styles.Text}>{descripcion}</Text>
-              </CardItem>
-              <CardItem style={styles.Card} cardBody>
-                <Text style={styles.Text}>Hora: </Text>
               </CardItem>
               <CardItem footer>
 
