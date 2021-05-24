@@ -22,13 +22,18 @@ router.post('/insertar', async (req, res) => {
             console.log("error al insertar", err.message)
         })
 
-})
-router.get('/Estadopormes/id:/fecha:', (req, res) => {
-    const id = req.params.id
-    const fecha = req.params.fecha
-
-
-
+    })
+router.get('/Estadospormes/:id/:fecha', (req, res) => {
+    const id= req.params.id
+    const fecha= req.params.fecha
+    
+    Estado.find({_id:id,fecha : {"$gt" : fecha}})
+    .then(doc=>{
+        res.json({data:doc});
+    })
+    .catch(err=>{
+        console.log("error", err.message)
+    })
 
 })
 module.exports = router;
