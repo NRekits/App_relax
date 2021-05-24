@@ -28,7 +28,8 @@ router.post('/insertar', async (req, res) => {
 //Para mostrar en el calendario
 router.get('/Estadospormes/:id/:fecha', (req, res) => {
     const id= req.params.id
-    const fecha= req.params.fecha
+    const fecha = new Date(req.params.fecha);
+    console.log(id);
     
     Estado.find({iduser:id,fecha : {"$gte" : fecha}})
     .then(doc=>{
