@@ -60,6 +60,7 @@ export default class AddTriunfoScreen extends React.Component {
     })
     .finally(() => {
       if(!this.state.error){
+        Alert.alert('Felicidades', "Te ganaste una medalla", [{text: "Muchas gracias"}])
         this.props.navigation.navigate('Home');
       }
     });
