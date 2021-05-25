@@ -8,7 +8,8 @@ import {
   Icon, Title,
   Item, Input,
   Textarea,
-  Label
+  Label,
+  Toast
 } from 'native-base';
 import Modal from 'react-native-modalbox';
 import { LoadingFull } from './../Components/Loading';
@@ -62,7 +63,20 @@ export default class AddTriunfoScreen extends React.Component {
       })
       .finally(() => {
         if (!this.state.error) {
-          this.refs.modalTriunfo.open()
+          // Si vas a usar el modal, descomenta esta línea para que aparezca cuando realizaste un triunfo
+          //this.refs.modalTriunfo.open()
+
+          // Comenta es toast si vas a usar el modal
+          Toast.show({
+            text: 'Has ganado una medalla',
+            buttonText: 'Continuar',
+            position: 'top',
+            type: 'success',
+            duration: 3000
+          });
+          //También comenta esta línea para evitar que se cambie de pantalla cuando abres el modal
+          this.props.navigation.navigate('Home');
+
         }
       });
   }
@@ -80,6 +94,20 @@ export default class AddTriunfoScreen extends React.Component {
   };
 
   render() {
+
+    const modalAlert = (
+      <Modal
+        onClosed={this.closeModal.bind(this)}
+        ref={"modalTriunfo"}
+        position={"center"}
+        isDisabled={this.state.isDisabled}
+        style={styles.modal}
+      >
+        <Text>Holis</Text>
+        <Button onPress={() => { this.setState({ isDisabled: !this.state.isDisabled }) }}><Text>Continuar</Text></Button>
+      </Modal>
+    );
+
     const {
       nombre,
       descripcion,
@@ -103,16 +131,9 @@ export default class AddTriunfoScreen extends React.Component {
             colors={["#00B0E8", "#BB8FCE"]}
             style={styles.background}
           />
-          <Modal
-            onClosed={this.closeModal.bind(this)}
-            ref={"modalTriunfo"}
-            position={"center"}
-            isDisabled={this.state.isDisabled}
-            style={styles.modal}
-          >
-            <Text>Holis</Text>
-            <Button onPress={() => { this.setState({isDisabled: !this.state.isDisabled})}}><Text>Continuar</Text></Button>
-          </Modal>
+
+          {modalAlert}
+
           <Header transparent androidStatusBarColor="#00B0E8">
             <Body>
               <Title style={styles.Header}>
