@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Dimensions, Alert, Image, StyleSheet, ToolbarAndroidComponent } from "react-native";
 import {
   Container,
@@ -22,25 +22,26 @@ import { isDefined } from "./../CommonFunctions";
 import * as SecureStore from 'expo-secure-store';
 import { LoadingFull } from './../Components/Loading';
 import IP_DB from './../ip_address';
+import { useEffect } from "react";
 
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 
-
 class HomeScreen extends React.Component {
   constructor(props) {
     super(props);
-    let today = new Date();
     this.state = {
       id: "",
       correo: '',
       estados: [],
       error: false,
-      isLoading: true
+      isLoading: true,
+      needUpdate: true,
+      justOnce: true,
+      idInterval: undefined
     };
   }
   //rutas
-
   getEstados = () => {
     console.log(this.state.id);
     const today = new Date();
@@ -53,7 +54,7 @@ class HomeScreen extends React.Component {
     fetch(`http://${IP_DB}:3000/Estado/Estadospormes/${this.props.route.params.id}/${Year}-${Month}-01`)
       .then((res) => res.json())
       .then((data) => {
-        console.log(data); this.setState({ error: false, isLoading: false, estados: [...data.data] });
+        this.setState({ error: false, isLoading: false, estados: [...data.data] });
       })
 
       .catch((error) => {
@@ -62,7 +63,7 @@ class HomeScreen extends React.Component {
       })
       .finally(() => {
         if (!this.state.error) {
-          this.setState({ isLoading: false });
+          this.setState({ isLoading: false});
         }
       });
   }
@@ -126,7 +127,8 @@ class HomeScreen extends React.Component {
         console.error(error); // aqui es para poner bonito el mensaje de error en caso de que no se haya podido eliminar
         this.setState({ error: true });
       }).finally(() => {
-        this.props.navigation.navigate('Login');
+        if(!this.state.error)
+          this.props.navigation.navigate('Login');
       });
   }
   /*
@@ -147,6 +149,7 @@ class HomeScreen extends React.Component {
       .finally(() => console.log(this.state.email, this.state.password));
     }
   */
+
   selectDate(date, today) {
 
     const FindDate = new Date(date.year, date.month - 1, date.day);
@@ -159,9 +162,23 @@ class HomeScreen extends React.Component {
   selectDateCalendar = (date) => {
     this.selectDate(date, false);
   }
+
   componentDidMount() {
-    this.setState({ id: this.props.route.params.id });
+    this.setState({ id: this.props.route.params.id, correo: this.props.route.params.correo });
     this.getEstados();
+
+    //esta es una solución temporal pero no sigue las prácticas de React para actualizar los datos, quedo en tus manos Nicole y Hugo del futuro
+    //El componente Home solo debería  obtener el estado del usuario del día en que se encuetre, no los estados de mes
+    //Como propiedad para calendario, este debería obtener el id del usuario para hacer un fetch a todos los estados de mes
+    //Inicio del código
+    this.setState({idInterval: setInterval(() => {
+      this.getEstados();
+    }, 10000)});
+    //Fin del código
+
+  }
+  componentWillUnmount(){
+    clearInterval(this.state.idInterval);
   }
 
   render() {

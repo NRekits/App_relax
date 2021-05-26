@@ -65,7 +65,7 @@ class LoginScreen extends React.Component {
               console.log(this.state.error);
               if (!this.state.error) {
                 this.setState({password: ""});
-                this.props.navigation.navigate("Home", {id: this.state.id}); 
+                this.props.navigation.navigate("Home", {id: this.state.id, correo: this.state.email}); 
                 // Cuando finalice, nos vamos a la página de Home, en caso de que la petición fue exitosa
               }
             });

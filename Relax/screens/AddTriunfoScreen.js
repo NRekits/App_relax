@@ -74,9 +74,9 @@ export default class AddTriunfoScreen extends React.Component {
             type: 'success',
             duration: 3000
           });
-          //También comenta esta línea para evitar que se cambie de pantalla cuando abres el modal
-          this.props.navigation.navigate('Home');
 
+          //También comenta esta línea para evitar que se cambie de pantalla cuando abres el modal
+          this.props.navigation.navigate('Home', {id: this.state.diUsuario, isLoading: true});
         }
       });
   }
@@ -92,6 +92,7 @@ export default class AddTriunfoScreen extends React.Component {
       selectedDate: date
     });
   };
+
 
   render() {
 
