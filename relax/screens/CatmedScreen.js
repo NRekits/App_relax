@@ -39,7 +39,7 @@ const LISTA_MEDITACIONES = [
     nombre: "Escaneo del cuerpo",
     descripcion:
       "Esta meditación está diseñada para familiarizarnos con las sensaciones más sutiles de nuestro cuerpo y darnos cuenta de la forma en que cambian continuamente, para así aprender a prestar más atención a cómo nos sentimos en el momento presente",
-    url: "https://kensho.life/meditaciones-guiadas/escaneo-del-cuerpo-10-minutos",
+    url: "https://static1.squarespace.com/static/59a6746ef7e0ab8b4a7f53d1/t/5d2da5eca923720001ee96d9/1563272713916/0201+Escaneo+del+Cuerpo+-+10min+-+Kensho+Life+-+Meditaciones+Guiadas.mp3/original/0201+Escaneo+del+Cuerpo+-+10min+-+Kensho+Life+-+Meditaciones+Guiadas.mp3",
     
   },
   {
@@ -47,7 +47,7 @@ const LISTA_MEDITACIONES = [
     nombre: "Reconocer el estrés",
     descripcion:
       "En esta meditación practicamos localizar y abrirnos a las sensaciones físicas que se crean cuando algo nos estresa. Esta apertura y aceptación nos ayuda a que nos sintamos menos atrapados por el estrés.",
-    url: "https://kensho.life/meditaciones-guiadas/reconocer-el-estres-12-minutos",
+    url: "https://static1.squarespace.com/static/59a6746ef7e0ab8b4a7f53d1/t/5e4128742c32025813665852/1581331207888/1201+Reconocer+el+Estres+-+12+Minutos+-+Meditaciones+Guiadas+Kensho+Life.mp3/original/1201+Reconocer+el+Estres+-+12+Minutos+-+Meditaciones+Guiadas+Kensho+Life.mp3",
     
   },
   {
@@ -55,7 +55,7 @@ const LISTA_MEDITACIONES = [
     nombre: "Meditación de S.O.S",
     descripcion:
       "En esta meditación practicamos hacer una breve pausa cuando nos sentimos estresados para evitar dejarnos arrastrar por la reactividad o entrar en una espiral de pensamientos negativos.",
-    url: "https://kensho.life/meditaciones-guiadas/meditacion-sos-5-minutos",
+    url: "https://static1.squarespace.com/static/59a6746ef7e0ab8b4a7f53d1/t/5e41355a4b6b8940eed86657/1582018425557/1401+Meditaci%C3%B3n+SOS+-+5+Minutos+-+Meditaciones+Guiadas+Kensho+Life.mp3/original/1401+Meditaci%C3%B3n+SOS+-+5+Minutos+-+Meditaciones+Guiadas+Kensho+Life.mp3",
     
   },
 ];

@@ -119,6 +119,7 @@ class RegisterScreen extends React.Component {
               <Label style={styles.Label}>Contraseña</Label>
               <Input
                 value={this.state.password}
+                secureTextEntry={true}
                 onChangeText={(text) => {
                   this.setState({ password: text })
                 }}
@@ -128,6 +129,7 @@ class RegisterScreen extends React.Component {
               <Label style={styles.Label}>Confirmar contraseña</Label>
               <Input
                 value={this.state.confirmPassword}
+                secureTextEntry={true}
                 onChangeText={(text) => {
                   this.setState({ confirmPassword: text })
                 }}
