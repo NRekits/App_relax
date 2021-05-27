@@ -92,7 +92,9 @@ export default class EstadoScreen extends React.Component {
             <Body>
               <Title style={styles.Header}>
              
-              <Button iconRight transparent >
+              <Button iconRight transparent  onPress={() => {
+                this.goBack();
+              }}>
               <Icon
                 name="arrow-back"
                 style={{ color: "white", fontSize:30 }}

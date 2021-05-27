@@ -28,8 +28,7 @@ export default class Calendario extends React.Component {
         //Por lo que este componente solo debería recibir el id del usuario para realizarlo
         //Inicio del código
         this.setState({idInterval: setInterval( () => {
-            this.getStatesFromProps()
-        }, 1000)});
+            this.getStatesFromProps() }, 1000)});
         //Fin del código
 
     }
