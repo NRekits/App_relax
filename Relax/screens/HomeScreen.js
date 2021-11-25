@@ -173,7 +173,7 @@ class HomeScreen extends React.Component {
     //Inicio del código
     this.setState({idInterval: setInterval(() => {
       this.getEstados();
-    }, 1000)});
+    }, 10000)});
     //Fin del código
 
   }
